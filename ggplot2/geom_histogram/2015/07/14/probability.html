@@ -1,9 +1,0 @@
-library(plotly)
-
-df <- data.frame(x = rnorm(1000))
-
-ggplot(df, aes(x=x)) +
-    geom_histogram(aes(y = ..density..), binwidth=density(df$x)$bw) +
-    geom_density(fill="red", alpha = 0.2)
-
-ggplotly()
