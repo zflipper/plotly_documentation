@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <meta charset="utf-8"/>
+
+      <!-- Media query magic - http://stackoverflow.com/questions/19945658/my-iphone-thinks-its-980px-wide -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+      
+
+      <!--
+      //// Stylesheets
+      -->
+
+      <!-- Fonts -->
+      <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Ubuntu+Mono:400,700|Asap" rel="stylesheet" type="text/css"/>
+
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+      <!-- Main Stylesheets -->
+      <link rel="stylesheet" type="text/css" href="/all_static/css/main.css?version=ff7246c21c">
+
+      <!-- LOCAL DEV STYLESHEET -->
+      <!--<link rel="stylesheet" type="text/css" href="http://api.plotly.dev/all_static/css/main.css">-->
+
+      <!-- Icon -->
+      <link rel="shortcut icon" href="/all_static/images/plotly-ico.png" type="image/x-icon"/>
+
+      <!-- Google Tags-->
+      <!-- Google Tag Manager Tag -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N6T2RXG');</script>
+
+      <script id="drift">
+  !(function() {
+    var t = (window.driftt = window.drift = window.driftt || []);
+    if (!t.init) {
+      if (t.invoked)
+        return void (
+          window.console &&
+          console.error &&
+          console.error("Drift snippet included twice.")
+        );
+      (t.invoked = !0),
+        (t.methods = [
+          "identify",
+          "config",
+          "track",
+          "reset",
+          "debug",
+          "show",
+          "ping",
+          "page",
+          "hide",
+          "off",
+          "on"
+        ]),
+        (t.factory = function(e) {
+          return function() {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }),
+        t.methods.forEach(function(e) {
+          t[e] = t.factory(e);
+        }),
+        (t.load = function(t) {
+          var e = 3e5,
+            n = Math.ceil(new Date() / e) * e,
+            o = document.createElement("script");
+          (o.type = "text/javascript"),
+            (o.async = !0),
+            (o.crossorigin = "anonymous"),
+            (o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js");
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        });
+    }
+  })();
+  drift.SNIPPET_VERSION = "0.3.1";
+  drift.load("4t5t45cv8ey2");
+</script>
+
+
+
+    <!-- META TAGS -->
+    <!-- SEO Tags - title, meta_description -->
+<title>Network Graphs | Python | Plotly  </title>
+<meta name="description" content="How to make Network Graphs in Python with Plotly. One examples of a network graph with NetworkX">
+
+<!-- Bing tags -->
+    <meta name="msvalidate.01" content="D319859A832F9F1D15A7646E2A42150A" />
+<!-- Facebook tags -->
+    <meta property="og:title" content="Network Graphs"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://images.plot.ly/plotly-documentation/thumbnail/net.jpg">
+    <meta property="og:description" content="How to make Network Graphs in Python with Plotly. One examples of a network graph with NetworkX"/>
+    <meta property="og:url" />
+    <meta property="fb:admins" content="1123751525"/>
+    <meta property="fb:admins" content="22418"/>
+
+<!-- twitter tags -->
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:title" content="Network Graphs"/>
+    <meta name="twitter:url" content="https://plot.ly/python/network-graphs/"/>
+    <meta name="twitter:description" content="How to make Network Graphs in Python with Plotly. One examples of a network graph with NetworkX"/>
+    <meta name="twitter:image" content="https://images.plot.ly/plotly-documentation/thumbnail/net.jpg">
+    <meta name="twitter:site" content="@plotlygraphs"/>
+
+<!-- Favicon -->
+    <link rel="shortcut icon" href="/all_static/images/plotly-ico.png?v=2" />
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+
+</head>
+
+
+<body data-spy="scroll" data-target=".watch" style="position:relative;">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6T2RXG"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+	your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div style="margin-top: 80px"></div>
+
+
+<header data-spy="affix" data-offset-top="80" class="header-main --default">
+    <div class="--wrap">
+        <div class="--wrap-left"><a href="https://plot.ly/" target="_blank" class="-identity">
+            <div class="-identity">
+                <img src="/all_static/images/plotly_graphing_libraries.png" style="height: 66px;"/>
+            </div></a>
+
+        </div>
+        <div class="--wrap-right">
+            <nav class="--nav-meta" role="navigation">
+                <ul>
+                    <li><a href="https://go.plot.ly/demo_live" data-mode="1" target="_blank" class="typeform-share button --enterprise-quaternary">DEMO DASH</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<section class="--breadcrumb-container"  data-spy="affix" >
+    <div class="--wrap">
+        <!--
+            Show this if page is too thin (hides breadcrumb list)
+            Toggles sidebar slide in/out (see main.js)
+        -->
+        <a class="toggle-sidebar">
+            <div class="icon">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="#000000" d="M5,13L9,17L7.6,18.42L1.18,12L7.6,5.58L9,7L5,11H21V13H5M21,6V8H11V6H21M21,16V18H11V16H21Z" />
+                </svg>
+            </div>
+            <span class="show">Show Sidebar</span>
+            <span class="hide">Hide Sidebar</span>
+        </a>
+
+        <!--
+            Breadcrumb List
+        -->
+        <ul class="--breadcrumb-list">
+            <li class="--breadcrumb-item">
+                <div class="icon">
+                    <svg style="width:24px;height:24px" viewbox="0 0 24 24">
+                        <path fill="#000000" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z"></path>
+                    </svg>
+                </div>
+                <a href="https://help.plot.ly/"><span>Help</span></a>
+            </li>
+            <li class="--breadcrumb-item"><a href="/graphing-libraries/"><span>Open Source Graphing Libraries</span></a></li>
+            
+            <li class="--breadcrumb-item">
+                <a href="/python"  ><span>Python</span></a>
+            </li>
+            
+
+            
+                
+                
+                
+                <li class="--breadcrumb-item">
+                <a href="/python/scientific-charts">
+                        <span>Scientific</span>
+                </a>
+                    </li>
+
+            
+
+            
+            
+                <li class="--breadcrumb-item">
+                    <span>Network Graphs</span>
+                </li>
+            
+            
+
+            
+        </ul>
+
+        <!--
+            Fork on GitHub :)
+        -->
+
+     <div class="--fork">
+        
+        
+        
+
+        <a href= "https://mybinder.org/v2/gh/plotly/plotly.py-docs/master?filepath=python/network-graphs.md"
+        target="_blank" style="float: right; margin-left: 20px;">
+            <img src="/all_static/images/binder_badge.svg" />
+        </a>
+
+        <a id="forklink" href= "https://github.com/plotly/plotly.py-docs/edit/master/python/network-graphs.md" >
+        
+                <div class="icon">
+                    <svg style="width:24px;height:24px" viewbox="0 0 24 24">
+                        <path fill="#000000" d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z"></path>
+                    </svg>
+                </div>
+                <span>Edit this page on GitHub</span>
+            </a>
+    </div>
+</section>
+
+
+<main class="--page page--single --index">
+
+	<div class="--wrap">
+		<!-- aside - Main Sidebar-->
+		<aside class="--sidebar-container">
+			<div class="--sidebar-fixed reference" data-spy="affix" id="where">
+				<header class="--sidebar-header">Navigation</header>
+				<nav class="--sidebar-body watch"   id="where">
+          <ul class="--sidebar-list"></ul>
+          
+					
+					<button class="--btn back">
+						<div class="icon">
+							<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+								<path fill="#000000"
+									  d="M20,10V14H11L14.5,17.5L12.08,19.92L4.16,12L12.08,4.08L14.5,6.5L11,10H20Z"/>
+							</svg>
+						</div>
+						<span><a href="/python/">Back to Python
+						</a></span>
+					</button>
+				</nav>
+			</div>
+		</aside>
+		<!-- Main-->
+		<section class="--page-body --tutorial-index --base">
+			<header class="--welcome">
+				<div class="--welcome-body">
+					<!--div.--wrap-inner-->
+					<div class="--title">
+						<div class="--category-img">
+
+
+
+
+							
+							
+							<img src="https://images.plot.ly/language-icons/api-home/python-logo.png" alt="">
+              
+              
+							
+							
+							
+							
+							
+							
+							
+
+
+
+
+
+						</div>
+						<div class="--body">
+
+							
+							<h1>
+								Network Graphs
+								
+								in Python
+								
+							</h1>
+							<p>How to make Network Graphs in Python with Plotly. One examples of a network graph with NetworkX </p>
+
+							
+              	<nav class="lang-nav">
+		<ul class="lang-nav--list"><li class="lang-nav--item">
+                <a class="lang_nav_button current" href="/python/network-graphs/">
+                    <div><img src="https://plot.ly/gh-pages/documentation/static/images/python-small.png" alt="python" class="lang_nav_thum"></div>
+                    Python
+                </a>
+            </li><li class="lang-nav--item">
+                <a class="lang_nav_button " href="/r/network-graphs/">
+                    <div><img src="https://plot.ly/gh-pages/documentation/static/images/r-small.png" alt="r" class="lang_nav_thum"></div>
+                    R
+                </a>
+            </li></ul>
+		</nav>
+
+
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Start Plotly Basics Section -->
+			<section class="tutorial-content">
+
+				
+
+
+
+
+
+
+				
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this example we show how to visualize a network graph created using <code>networkx</code>.</p>
+<p>Install the Python library <code>networkx</code> with <code>pip install networkx</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#160;Create-random-graph">&#160;Create random graph<a class="anchor-link" href="#&#160;Create-random-graph">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">random_geometric_graph</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Create-Edges">Create Edges<a class="anchor-link" href="#Create-Edges">&#182;</a></h4><p>Add edges as disconnected lines in a single trace and nodes as a scatter trace</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">edge_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+    <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;pos&#39;</span><span class="p">]</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;pos&#39;</span><span class="p">]</span>
+    <span class="n">edge_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">edge_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+    <span class="n">edge_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">edge_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+    <span class="n">edge_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+    <span class="n">edge_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">edge_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edge_y</span><span class="p">,</span>
+    <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#888&#39;</span><span class="p">),</span>
+    <span class="n">hoverinfo</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">)</span>
+
+<span class="n">node_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">node_y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;pos&#39;</span><span class="p">]</span>
+    <span class="n">node_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">node_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">node_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">node_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">node_y</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+    <span class="n">hoverinfo</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">showscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="c1"># colorscale options</span>
+        <span class="c1">#&#39;Greys&#39; | &#39;YlGnBu&#39; | &#39;Greens&#39; | &#39;YlOrRd&#39; | &#39;Bluered&#39; | &#39;RdBu&#39; |</span>
+        <span class="c1">#&#39;Reds&#39; | &#39;Blues&#39; | &#39;Picnic&#39; | &#39;Rainbow&#39; | &#39;Portland&#39; | &#39;Jet&#39; |</span>
+        <span class="c1">#&#39;Hot&#39; | &#39;Blackbody&#39; | &#39;Earth&#39; | &#39;Electric&#39; | &#39;Viridis&#39; |</span>
+        <span class="n">colorscale</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span><span class="p">,</span>
+        <span class="n">reversescale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="p">[],</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">colorbar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">thickness</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Node Connections&#39;</span><span class="p">,</span>
+            <span class="n">xanchor</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+            <span class="n">titleside</span><span class="o">=</span><span class="s1">&#39;right&#39;</span>
+        <span class="p">),</span>
+        <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Color-Node-Points">Color Node Points<a class="anchor-link" href="#Color-Node-Points">&#182;</a></h4><p>Color node points by the number of connections.</p>
+<p>Another option would be to size points by the number of connections
+i.e. <code>node_trace.marker.size = node_adjacencies</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">node_adjacencies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">node_text</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">adjacencies</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">adjacency</span><span class="p">()):</span>
+    <span class="n">node_adjacencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adjacencies</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">node_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;# of connections: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adjacencies</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+
+<span class="n">node_trace</span><span class="o">.</span><span class="n">marker</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">node_adjacencies</span>
+<span class="n">node_trace</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">node_text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Create-Network-Graph">Create Network Graph<a class="anchor-link" href="#Create-Network-Graph">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">edge_trace</span><span class="p">,</span> <span class="n">node_trace</span><span class="p">],</span>
+             <span class="n">layout</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&lt;br&gt;Network graph made with Python&#39;</span><span class="p">,</span>
+                <span class="n">titlefont_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+                <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">hovermode</span><span class="o">=</span><span class="s1">&#39;closest&#39;</span><span class="p">,</span>
+                <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">40</span><span class="p">),</span>
+                <span class="n">annotations</span><span class="o">=</span><span class="p">[</span> <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Python code: &lt;a href=&#39;https://plot.ly/ipython-notebooks/network-graphs/&#39;&gt; https://plot.ly/ipython-notebooks/network-graphs/&lt;/a&gt;&quot;</span><span class="p">,</span>
+                    <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span>
+                    <span class="n">x</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">0.002</span> <span class="p">)</span> <span class="p">],</span>
+                <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zeroline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zeroline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+                <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        if (typeof require !== 'undefined') {
+        require.undef("plotly");
+        requirejs.config({
+            paths: {
+                'plotly': ['https://cdn.plot.ly/plotly-latest.min']
+            }
+        });
+        require(['plotly'], function(Plotly) {
+            window._Plotly = Plotly;
+        });
+        }
+        </script>
+        
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+        
+        
+            <div id="c38b4a7b-7dbb-43c0-946c-fdf37563aa6f" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <script type="text/javascript">
+                require(["plotly"], function(Plotly) {
+                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    
+                if (document.getElementById("c38b4a7b-7dbb-43c0-946c-fdf37563aa6f")) {
+                    Plotly.newPlot(
+                        'c38b4a7b-7dbb-43c0-946c-fdf37563aa6f',
+                        [{"hoverinfo": "none", "line": {"color": "#888", "width": 0.5}, "mode": "lines", "type": "scatter", "x": [0.9869697610736279, 0.9538764114888266, null, 0.9869697610736279, 0.9275336856439217, null, 0.9869697610736279, 0.9957088826463372, null, 0.9869697610736279, 0.97820266871148, null, 0.9869697610736279, 0.9092444906434977, null, 0.9869697610736279, 0.8907327548169215, null, 0.9869697610736279, 0.9115758170564746, null, 0.9869697610736279, 0.9093621603490467, null, 0.9869697610736279, 0.9344061624607939, null, 0.624153482406981, 0.5903866310338136, null, 0.624153482406981, 0.5505414681044513, null, 0.624153482406981, 0.5711418988170233, null, 0.624153482406981, 0.5307973665839751, null, 0.624153482406981, 0.6385395509803109, null, 0.624153482406981, 0.6191164854888215, null, 0.624153482406981, 0.5590595890001976, null, 0.8338182778735213, 0.8249209416597039, null, 0.8338182778735213, 0.8458328760443887, null, 0.8338182778735213, 0.7510066855592561, null, 0.8338182778735213, 0.9242379279668322, null, 0.8338182778735213, 0.8572154134097416, null, 0.8338182778735213, 0.7766251811400071, null, 0.8338182778735213, 0.7952389596785292, null, 0.8532059052767176, 0.8907327548169215, null, 0.8532059052767176, 0.847853290944405, null, 0.8532059052767176, 0.9093621603490467, null, 0.8532059052767176, 0.8782894991450778, null, 0.8532059052767176, 0.9344061624607939, null, 0.8532059052767176, 0.7782133589166081, null, 0.8532059052767176, 0.8797375957811168, null, 0.8532059052767176, 0.9092444906434977, null, 0.8532059052767176, 0.7687652114993547, null, 0.8532059052767176, 0.9275336856439217, null, 0.8532059052767176, 0.9538764114888266, null, 0.8532059052767176, 0.9115758170564746, null, 0.7482056326379576, 0.8500678433353784, null, 0.7482056326379576, 0.6555997118771973, null, 0.7482056326379576, 0.7388798490421817, null, 0.7482056326379576, 0.8013853655471201, null, 0.7482056326379576, 0.6851424229530523, null, 0.7482056326379576, 0.7973770265015475, null, 0.4577572815822143, 0.36074062242419414, null, 0.4577572815822143, 0.47137988913898343, null, 0.4577572815822143, 0.3545408134145075, null, 0.4577572815822143, 0.3779222868584883, null, 0.4577572815822143, 0.5232242486747795, null, 0.4577572815822143, 0.4009706853994799, null, 0.4577572815822143, 0.4076011323289145, null, 0.13560486798568838, 0.19309552058935997, null, 0.13560486798568838, 0.0652137818444617, null, 0.13560486798568838, 0.16191362020363176, null, 0.13560486798568838, 0.13236316864525655, null, 0.13560486798568838, 0.17455022300358247, null, 0.13560486798568838, 0.12585365112716507, null, 0.13560486798568838, 0.22724679364310307, null, 0.13560486798568838, 0.16628876313544427, null, 0.13560486798568838, 0.2173444602950888, null, 0.38535699757675534, 0.35707246442975615, null, 0.38535699757675534, 0.40705569942537134, null, 0.38535699757675534, 0.36372335939599243, null, 0.38535699757675534, 0.3907255813950712, null, 0.38535699757675534, 0.38485904466061915, null, 0.38535699757675534, 0.44089678526402254, null, 0.38535699757675534, 0.5020011569047959, null, 0.38535699757675534, 0.2865753738298653, null, 0.38535699757675534, 0.40660898670993195, null, 0.38535699757675534, 0.4628255820445688, null, 0.38535699757675534, 0.31730096135007657, null, 0.8797375957811168, 0.9115758170564746, null, 0.8797375957811168, 0.847853290944405, null, 0.8797375957811168, 0.8782894991450778, null, 0.8797375957811168, 0.9344061624607939, null, 0.8797375957811168, 0.97820266871148, null, 0.8797375957811168, 0.9092444906434977, null, 0.8797375957811168, 0.9275336856439217, null, 0.8797375957811168, 0.9538764114888266, null, 0.13157768130016956, 0.16378008859188997, null, 0.13157768130016956, 0.19319330264287704, null, 0.13157768130016956, 0.12081699596209272, null, 0.13157768130016956, 0.24461086760918826, null, 0.13157768130016956, 0.10373796866461338, null, 0.13157768130016956, 0.029143685842526246, null, 0.13157768130016956, 0.08944950194952417, null, 0.13157768130016956, 0.07378531016725698, null, 0.20969045160533362, 0.1672742073258523, null, 0.20969045160533362, 0.2942813311136525, null, 0.20969045160533362, 0.28780212078428924, null, 0.20969045160533362, 0.26882295265308465, null, 0.20969045160533362, 0.1970230139390673, null, 0.20969045160533362, 0.19573094509632516, null, 0.20969045160533362, 0.19319330264287704, null, 0.20969045160533362, 0.09337496764275433, null, 0.20969045160533362, 0.25188744056361445, null, 0.20969045160533362, 0.28522854231115924, null, 0.20969045160533362, 0.2330927671213927, null, 0.09628781177856882, 0.12585365112716507, null, 0.09628781177856882, 0.19945793882169716, null, 0.09628781177856882, 0.20324681509857256, null, 0.09628781177856882, 0.04690775296946825, null, 0.09628781177856882, 0.11280852698632171, null, 0.09628781177856882, 0.012286826432802433, null, 0.09628781177856882, 0.15726065366496034, null, 0.09628781177856882, 0.14341313410747913, null, 0.09628781177856882, 0.03355285976890332, null, 0.09628781177856882, 0.12942704693481843, null, 0.09628781177856882, 0.20621129201476396, null, 0.09628781177856882, 0.16628876313544427, null, 0.3070346571486722, 0.19585942240280918, null, 0.3070346571486722, 0.31058998399945215, null, 0.3070346571486722, 0.3944047170712487, null, 0.3070346571486722, 0.2777642375867829, null, 0.3070346571486722, 0.33867997016860407, null, 0.3070346571486722, 0.28059040908142474, null, 0.3070346571486722, 0.3806734271447626, null, 0.3070346571486722, 0.3150603434952972, null, 0.3070346571486722, 0.31148861556919083, null, 0.3070346571486722, 0.2958146166684136, null, 0.8619173689695756, 0.8323062050044018, null, 0.8619173689695756, 0.9728352660627428, null, 0.8619173689695756, 0.9177899406048944, null, 0.8619173689695756, 0.7989277845995358, null, 0.8619173689695756, 0.8196712631238203, null, 0.8619173689695756, 0.8455976229886206, null, 0.8619173689695756, 0.8633630900685745, null, 0.8619173689695756, 0.8500678433353784, null, 0.8619173689695756, 0.7388798490421817, null, 0.8619173689695756, 0.7788124583933873, null, 0.8619173689695756, 0.7973770265015475, null, 0.8500678433353784, 0.9351632364768435, null, 0.8500678433353784, 0.8323062050044018, null, 0.8500678433353784, 0.8455976229886206, null, 0.8500678433353784, 0.9190353113813936, null, 0.8500678433353784, 0.8013853655471201, null, 0.8500678433353784, 0.92349638307269, null, 0.8500678433353784, 0.9247685785960813, null, 0.8500678433353784, 0.7973770265015475, null, 0.8500678433353784, 0.9188229169548633, null, 0.12585365112716507, 0.16628876313544427, null, 0.12585365112716507, 0.22724679364310307, null, 0.12585365112716507, 0.12942704693481843, null, 0.12585365112716507, 0.14341313410747913, null, 0.12585365112716507, 0.17455022300358247, null, 0.12585365112716507, 0.012286826432802433, null, 0.12585365112716507, 0.15726065366496034, null, 0.12585365112716507, 0.13236316864525655, null, 0.12585365112716507, 0.0652137818444617, null, 0.12585365112716507, 0.19309552058935997, null, 0.12585365112716507, 0.2173444602950888, null, 0.12585365112716507, 0.19945793882169716, null, 0.9275336856439217, 0.8907327548169215, null, 0.9275336856439217, 0.8782894991450778, null, 0.9275336856439217, 0.9957088826463372, null, 0.9275336856439217, 0.9093621603490467, null, 0.9275336856439217, 0.9344061624607939, null, 0.9275336856439217, 0.97820266871148, null, 0.9275336856439217, 0.847853290944405, null, 0.9275336856439217, 0.9092444906434977, null, 0.9275336856439217, 0.9115758170564746, null, 0.9275336856439217, 0.9538764114888266, null, 0.862775265476485, 0.7768203829414974, null, 0.862775265476485, 0.9670873241765257, null, 0.862775265476485, 0.8639540892257934, null, 0.862775265476485, 0.8897332713852858, null, 0.2851033301559258, 0.24461086760918826, null, 0.2851033301559258, 0.31730096135007657, null, 0.2851033301559258, 0.35707246442975615, null, 0.2851033301559258, 0.16378008859188997, null, 0.2851033301559258, 0.20600689092037183, null, 0.2851033301559258, 0.2591753914519669, null, 0.2851033301559258, 0.23988807294614056, null, 0.2851033301559258, 0.2807484992860627, null, 0.2851033301559258, 0.3085029676380945, null, 0.2851033301559258, 0.3907255813950712, null, 0.28780212078428924, 0.2958146166684136, null, 0.28780212078428924, 0.4009706853994799, null, 0.28780212078428924, 0.1970230139390673, null, 0.28780212078428924, 0.36074062242419414, null, 0.28780212078428924, 0.3779222868584883, null, 0.28780212078428924, 0.26882295265308465, null, 0.28780212078428924, 0.25188744056361445, null, 0.28780212078428924, 0.1672742073258523, null, 0.28780212078428924, 0.3545408134145075, null, 0.28780212078428924, 0.29222103524212784, null, 0.28780212078428924, 0.3150603434952972, null, 0.40660898670993195, 0.4628255820445688, null, 0.40660898670993195, 0.42123055605352044, null, 0.40660898670993195, 0.4384699777119164, null, 0.40660898670993195, 0.3907255813950712, null, 0.40660898670993195, 0.35707246442975615, null, 0.40660898670993195, 0.44089678526402254, null, 0.40660898670993195, 0.31730096135007657, null, 0.40660898670993195, 0.4993589567624287, null, 0.40660898670993195, 0.38485904466061915, null, 0.5232242486747795, 0.47137988913898343, null, 0.35707246442975615, 0.23988807294614056, null, 0.35707246442975615, 0.3907255813950712, null, 0.35707246442975615, 0.44089678526402254, null, 0.35707246442975615, 0.38485904466061915, null, 0.35707246442975615, 0.36372335939599243, null, 0.35707246442975615, 0.4628255820445688, null, 0.35707246442975615, 0.2865753738298653, null, 0.35707246442975615, 0.31730096135007657, null, 0.35707246442975615, 0.2591753914519669, null, 0.9177899406048944, 0.8196712631238203, null, 0.9177899406048944, 0.860944193351868, null, 0.9177899406048944, 0.8633630900685745, null, 0.9177899406048944, 0.9728352660627428, null, 0.9177899406048944, 0.9402110768332033, null, 0.9177899406048944, 0.8323062050044018, null, 0.9177899406048944, 0.9871639666037187, null, 0.9177899406048944, 0.8455976229886206, null, 0.16628876313544427, 0.22724679364310307, null, 0.16628876313544427, 0.14341313410747913, null, 0.16628876313544427, 0.2173444602950888, null, 0.16628876313544427, 0.19945793882169716, null, 0.16628876313544427, 0.17455022300358247, null, 0.16628876313544427, 0.20324681509857256, null, 0.16628876313544427, 0.19309552058935997, null, 0.16628876313544427, 0.12942704693481843, null, 0.16628876313544427, 0.15726065366496034, null, 0.16628876313544427, 0.20621129201476396, null, 0.10101356362413283, 0.04903446130234068, null, 0.10101356362413283, 0.1970230139390673, null, 0.10101356362413283, 0.06778804526178739, null, 0.10101356362413283, 0.1672742073258523, null, 0.10101356362413283, 0.06350022181549875, null, 0.10101356362413283, 0.09337496764275433, null, 0.5020011569047959, 0.4628255820445688, null, 0.5020011569047959, 0.44089678526402254, null, 0.5020011569047959, 0.5326505397873061, null, 0.5020011569047959, 0.5934794605969209, null, 0.5020011569047959, 0.5857800665405284, null, 0.5020011569047959, 0.5443507535396063, null, 0.5020011569047959, 0.5645907472525039, null, 0.5020011569047959, 0.38485904466061915, null, 0.6851424229530523, 0.705201081256196, null, 0.6851424229530523, 0.6555997118771973, null, 0.6851424229530523, 0.5857800665405284, null, 0.6851424229530523, 0.7989277845995358, null, 0.6851424229530523, 0.7388798490421817, null, 0.6851424229530523, 0.7035136186035277, null, 0.6851424229530523, 0.5645907472525039, null, 0.5934794605969209, 0.7035136186035277, null, 0.5934794605969209, 0.643867839234746, null, 0.5934794605969209, 0.5999859831102019, null, 0.5934794605969209, 0.705201081256196, null, 0.5934794605969209, 0.5443507535396063, null, 0.5934794605969209, 0.6118863415761874, null, 0.5934794605969209, 0.5857800665405284, null, 0.5934794605969209, 0.5645907472525039, null, 0.5934794605969209, 0.5326505397873061, null, 0.5645907472525039, 0.4628255820445688, null, 0.5645907472525039, 0.5326505397873061, null, 0.5645907472525039, 0.6555997118771973, null, 0.5645907472525039, 0.5857800665405284, null, 0.7768203829414974, 0.8897332713852858, null, 0.7768203829414974, 0.722949145455163, null, 0.7768203829414974, 0.6771965371330677, null, 0.7768203829414974, 0.8639540892257934, null, 0.8907327548169215, 0.9957088826463372, null, 0.8907327548169215, 0.9538764114888266, null, 0.8907327548169215, 0.9344061624607939, null, 0.8907327548169215, 0.9092444906434977, null, 0.8907327548169215, 0.7687652114993547, null, 0.8907327548169215, 0.7782133589166081, null, 0.8907327548169215, 0.9115758170564746, null, 0.8907327548169215, 0.847853290944405, null, 0.8907327548169215, 0.9093621603490467, null, 0.7782133589166081, 0.847853290944405, null, 0.7782133589166081, 0.7687652114993547, null, 0.7782133589166081, 0.6751852563432427, null, 0.6751852563432427, 0.7687652114993547, null, 0.6751852563432427, 0.6385395509803109, null, 0.3944047170712487, 0.2777642375867829, null, 0.3944047170712487, 0.45442823686341416, null, 0.3944047170712487, 0.31148861556919083, null, 0.3944047170712487, 0.31058998399945215, null, 0.3944047170712487, 0.2958146166684136, null, 0.3944047170712487, 0.33867997016860407, null, 0.3944047170712487, 0.3806734271447626, null, 0.3944047170712487, 0.51050629532226, null, 0.11257620044376704, 0.19585942240280918, null, 0.11257620044376704, 0.12508790135814596, null, 0.11257620044376704, 0.1423690662058602, null, 0.012286826432802433, 0.0652137818444617, null, 0.012286826432802433, 0.04690775296946825, null, 0.012286826432802433, 0.03355285976890332, null, 0.847853290944405, 0.9344061624607939, null, 0.847853290944405, 0.9115758170564746, null, 0.847853290944405, 0.9092444906434977, null, 0.847853290944405, 0.7687652114993547, null, 0.847853290944405, 0.8782894991450778, null, 0.847853290944405, 0.9538764114888266, null, 0.12508790135814596, 0.1423690662058602, null, 0.12508790135814596, 0.19585942240280918, null, 0.1423690662058602, 0.19585942240280918, null, 0.1423690662058602, 0.04903446130234068, null, 0.14341313410747913, 0.17455022300358247, null, 0.14341313410747913, 0.11280852698632171, null, 0.14341313410747913, 0.12942704693481843, null, 0.14341313410747913, 0.20621129201476396, null, 0.14341313410747913, 0.19945793882169716, null, 0.14341313410747913, 0.03355285976890332, null, 0.14341313410747913, 0.20324681509857256, null, 0.14341313410747913, 0.15726065366496034, null, 0.14341313410747913, 0.04690775296946825, null, 0.3934488199960374, 0.37281707542384734, null, 0.3934488199960374, 0.44610263121268934, null, 0.3934488199960374, 0.34034683031272595, null, 0.3934488199960374, 0.4234244257632893, null, 0.3934488199960374, 0.44569470875535344, null, 0.3934488199960374, 0.3099124541965438, null, 0.3934488199960374, 0.4753977602300917, null, 0.3934488199960374, 0.41823302414071506, null, 0.3934488199960374, 0.40705569942537134, null, 0.3934488199960374, 0.4477916888273489, null, 0.3934488199960374, 0.45310919670590877, null, 0.3934488199960374, 0.3336192006968821, null, 0.28522854231115924, 0.19319330264287704, null, 0.28522854231115924, 0.35547108714241726, null, 0.28522854231115924, 0.2330927671213927, null, 0.28522854231115924, 0.36791323857290703, null, 0.28522854231115924, 0.4076011323289145, null, 0.28522854231115924, 0.2942813311136525, null, 0.28522854231115924, 0.2807484992860627, null, 0.28522854231115924, 0.3085029676380945, null, 0.28522854231115924, 0.24461086760918826, null, 0.28522854231115924, 0.36074062242419414, null, 0.28522854231115924, 0.19573094509632516, null, 0.28522854231115924, 0.3559822242935765, null, 0.6771965371330677, 0.6480944530526397, null, 0.6771965371330677, 0.722949145455163, null, 0.9957088826463372, 0.97820266871148, null, 0.9957088826463372, 0.9344061624607939, null, 0.9957088826463372, 0.9538764114888266, null, 0.9957088826463372, 0.9092444906434977, null, 0.9957088826463372, 0.9115758170564746, null, 0.01956133960110462, 0.04258964238187257, null, 0.01956133960110462, 0.0740658976328823, null, 0.7191557183666253, 0.7788124583933873, null, 0.7191557183666253, 0.705201081256196, null, 0.7191557183666253, 0.5999859831102019, null, 0.7191557183666253, 0.8196712631238203, null, 0.7191557183666253, 0.7510066855592561, null, 0.7191557183666253, 0.7766251811400071, null, 0.7191557183666253, 0.6118863415761874, null, 0.7191557183666253, 0.7940591740255577, null, 0.7191557183666253, 0.7035136186035277, null, 0.7191557183666253, 0.7952389596785292, null, 0.7191557183666253, 0.643867839234746, null, 0.16191362020363176, 0.16378008859188997, null, 0.16191362020363176, 0.13236316864525655, null, 0.16191362020363176, 0.0740658976328823, null, 0.16191362020363176, 0.19309552058935997, null, 0.16191362020363176, 0.23988807294614056, null, 0.16191362020363176, 0.2591753914519669, null, 0.16191362020363176, 0.20600689092037183, null, 0.6347095586946901, 0.5812710944355555, null, 0.6347095586946901, 0.643867839234746, null, 0.6347095586946901, 0.6070898368290693, null, 0.6347095586946901, 0.6356640809040811, null, 0.6347095586946901, 0.565096284499566, null, 0.6347095586946901, 0.7510066855592561, null, 0.6347095586946901, 0.5799678717948289, null, 0.6347095586946901, 0.7048005885631622, null, 0.6347095586946901, 0.6409048817856382, null, 0.7510066855592561, 0.7952389596785292, null, 0.7510066855592561, 0.8249209416597039, null, 0.7510066855592561, 0.8458328760443887, null, 0.7510066855592561, 0.8572154134097416, null, 0.7510066855592561, 0.6409048817856382, null, 0.7510066855592561, 0.7766251811400071, null, 0.7510066855592561, 0.643867839234746, null, 0.7510066855592561, 0.6356640809040811, null, 0.7510066855592561, 0.7048005885631622, null, 0.45442823686341416, 0.33867997016860407, null, 0.45442823686341416, 0.51050629532226, null, 0.45442823686341416, 0.3779222868584883, null, 0.45442823686341416, 0.3806734271447626, null, 0.45442823686341416, 0.5307973665839751, null, 0.13236316864525655, 0.19309552058935997, null, 0.13236316864525655, 0.0652137818444617, null, 0.13236316864525655, 0.0740658976328823, null, 0.13236316864525655, 0.17455022300358247, null, 0.8013853655471201, 0.9190353113813936, null, 0.8013853655471201, 0.722949145455163, null, 0.8013853655471201, 0.9188229169548633, null, 0.8013853655471201, 0.7973770265015475, null, 0.8013853655471201, 0.9247685785960813, null, 0.6191164854888215, 0.5711418988170233, null, 0.6191164854888215, 0.5903866310338136, null, 0.6191164854888215, 0.5505414681044513, null, 0.6191164854888215, 0.5307973665839751, null, 0.6191164854888215, 0.6385395509803109, null, 0.6191164854888215, 0.5590595890001976, null, 0.6191164854888215, 0.51050629532226, null, 0.565096284499566, 0.6356640809040811, null, 0.565096284499566, 0.6409048817856382, null, 0.565096284499566, 0.6070898368290693, null, 0.565096284499566, 0.5812710944355555, null, 0.565096284499566, 0.5799678717948289, null, 0.565096284499566, 0.5020864018611464, null, 0.6409048817856382, 0.5812710944355555, null, 0.6409048817856382, 0.7048005885631622, null, 0.6409048817856382, 0.5799678717948289, null, 0.6409048817856382, 0.6070898368290693, null, 0.6409048817856382, 0.6356640809040811, null, 0.6409048817856382, 0.643867839234746, null, 0.9402110768332033, 0.860944193351868, null, 0.9402110768332033, 0.8458328760443887, null, 0.9402110768332033, 0.8572154134097416, null, 0.9402110768332033, 0.8633630900685745, null, 0.9402110768332033, 0.9833472208416912, null, 0.20621129201476396, 0.11280852698632171, null, 0.20621129201476396, 0.19945793882169716, null, 0.20621129201476396, 0.20324681509857256, null, 0.20621129201476396, 0.12942704693481843, null, 0.20621129201476396, 0.15726065366496034, null, 0.2807484992860627, 0.36791323857290703, null, 0.2807484992860627, 0.3559822242935765, null, 0.2807484992860627, 0.19319330264287704, null, 0.2807484992860627, 0.2330927671213927, null, 0.2807484992860627, 0.3085029676380945, null, 0.2807484992860627, 0.2942813311136525, null, 0.2807484992860627, 0.24461086760918826, null, 0.2807484992860627, 0.35547108714241726, null, 0.8455976229886206, 0.7989277845995358, null, 0.8455976229886206, 0.8633630900685745, null, 0.8455976229886206, 0.7788124583933873, null, 0.8455976229886206, 0.7388798490421817, null, 0.8455976229886206, 0.8196712631238203, null, 0.8455976229886206, 0.7973770265015475, null, 0.8455976229886206, 0.8323062050044018, null, 0.2865753738298653, 0.19309552058935997, null, 0.2865753738298653, 0.31730096135007657, null, 0.2865753738298653, 0.38485904466061915, null, 0.2865753738298653, 0.3099124541965438, null, 0.2865753738298653, 0.22724679364310307, null, 0.2865753738298653, 0.2173444602950888, null, 0.2865753738298653, 0.3336192006968821, null, 0.2865753738298653, 0.36372335939599243, null, 0.5590595890001976, 0.5903866310338136, null, 0.5590595890001976, 0.5505414681044513, null, 0.5590595890001976, 0.6385395509803109, null, 0.5590595890001976, 0.5307973665839751, null, 0.5590595890001976, 0.5711418988170233, null, 0.5590595890001976, 0.51050629532226, null, 0.9188229169548633, 0.92349638307269, null, 0.9188229169548633, 0.9496136493291417, null, 0.9188229169548633, 0.9190353113813936, null, 0.9188229169548633, 0.9351632364768435, null, 0.9188229169548633, 0.9247685785960813, null, 0.9833472208416912, 0.9242379279668322, null, 0.8633630900685745, 0.8323062050044018, null, 0.8633630900685745, 0.8572154134097416, null, 0.8633630900685745, 0.7940591740255577, null, 0.8633630900685745, 0.8458328760443887, null, 0.8633630900685745, 0.7989277845995358, null, 0.8633630900685745, 0.7788124583933873, null, 0.8633630900685745, 0.860944193351868, null, 0.8633630900685745, 0.8196712631238203, null, 0.3336192006968821, 0.45310919670590877, null, 0.3336192006968821, 0.2173444602950888, null, 0.3336192006968821, 0.40705569942537134, null, 0.3336192006968821, 0.38485904466061915, null, 0.3336192006968821, 0.36372335939599243, null, 0.3336192006968821, 0.22724679364310307, null, 0.3336192006968821, 0.4234244257632893, null, 0.3336192006968821, 0.4477916888273489, null, 0.3336192006968821, 0.3099124541965438, null, 0.5020864018611464, 0.44569470875535344, null, 0.5020864018611464, 0.4753977602300917, null, 0.5020864018611464, 0.41823302414071506, null, 0.5020864018611464, 0.5799678717948289, null, 0.5020864018611464, 0.44610263121268934, null, 0.5020864018611464, 0.6070898368290693, null, 0.5020864018611464, 0.5812710944355555, null, 0.35547108714241726, 0.36074062242419414, null, 0.35547108714241726, 0.24461086760918826, null, 0.35547108714241726, 0.42123055605352044, null, 0.35547108714241726, 0.47137988913898343, null, 0.35547108714241726, 0.36791323857290703, null, 0.35547108714241726, 0.2942813311136525, null, 0.35547108714241726, 0.3085029676380945, null, 0.35547108714241726, 0.3559822242935765, null, 0.35547108714241726, 0.43261428194828966, null, 0.35547108714241726, 0.4076011323289145, null, 0.5999859831102019, 0.5857800665405284, null, 0.5999859831102019, 0.643867839234746, null, 0.5999859831102019, 0.5326505397873061, null, 0.5999859831102019, 0.6118863415761874, null, 0.5999859831102019, 0.5443507535396063, null, 0.5999859831102019, 0.705201081256196, null, 0.8897332713852858, 0.8639540892257934, null, 0.8897332713852858, 0.9670873241765257, null, 0.36791323857290703, 0.47137988913898343, null, 0.36791323857290703, 0.3085029676380945, null, 0.36791323857290703, 0.4384699777119164, null, 0.36791323857290703, 0.42123055605352044, null, 0.36791323857290703, 0.43261428194828966, null, 0.36791323857290703, 0.4076011323289145, null, 0.36791323857290703, 0.2942813311136525, null, 0.36791323857290703, 0.24461086760918826, null, 0.36791323857290703, 0.3559822242935765, null, 0.36791323857290703, 0.36074062242419414, null, 0.3779222868584883, 0.3150603434952972, null, 0.3779222868584883, 0.26882295265308465, null, 0.3779222868584883, 0.33867997016860407, null, 0.3779222868584883, 0.3806734271447626, null, 0.3779222868584883, 0.2958146166684136, null, 0.3779222868584883, 0.36074062242419414, null, 0.3779222868584883, 0.3545408134145075, null, 0.3779222868584883, 0.29222103524212784, null, 0.3779222868584883, 0.4009706853994799, null, 0.5326505397873061, 0.4628255820445688, null, 0.5326505397873061, 0.44089678526402254, null, 0.5326505397873061, 0.5443507535396063, null, 0.5326505397873061, 0.5857800665405284, null, 0.40705569942537134, 0.4234244257632893, null, 0.40705569942537134, 0.38485904466061915, null, 0.40705569942537134, 0.4628255820445688, null, 0.40705569942537134, 0.4753977602300917, null, 0.40705569942537134, 0.3099124541965438, null, 0.40705569942537134, 0.45310919670590877, null, 0.40705569942537134, 0.4477916888273489, null, 0.40705569942537134, 0.36372335939599243, null, 0.40705569942537134, 0.44610263121268934, null, 0.04258964238187257, 0.10373796866461338, null, 0.04258964238187257, 0.0740658976328823, null, 0.92349638307269, 0.9496136493291417, null, 0.92349638307269, 0.9190353113813936, null, 0.92349638307269, 0.9247685785960813, null, 0.92349638307269, 0.9351632364768435, null, 0.4753977602300917, 0.44569470875535344, null, 0.4753977602300917, 0.45310919670590877, null, 0.4753977602300917, 0.5799678717948289, null, 0.4753977602300917, 0.5812710944355555, null, 0.4753977602300917, 0.44610263121268934, null, 0.4753977602300917, 0.5443507535396063, null, 0.4753977602300917, 0.4477916888273489, null, 0.4753977602300917, 0.4234244257632893, null, 0.4753977602300917, 0.41823302414071506, null, 0.3150603434952972, 0.1970230139390673, null, 0.3150603434952972, 0.3806734271447626, null, 0.3150603434952972, 0.2958146166684136, null, 0.3150603434952972, 0.29222103524212784, null, 0.3150603434952972, 0.3545408134145075, null, 0.3150603434952972, 0.25188744056361445, null, 0.3150603434952972, 0.2777642375867829, null, 0.3150603434952972, 0.26882295265308465, null, 0.3150603434952972, 0.33867997016860407, null, 0.3150603434952972, 0.31148861556919083, null, 0.8639540892257934, 0.9670873241765257, null, 0.97820266871148, 0.9538764114888266, null, 0.97820266871148, 0.8782894991450778, null, 0.97820266871148, 0.9092444906434977, null, 0.97820266871148, 0.9115758170564746, null, 0.97820266871148, 0.9344061624607939, null, 0.04903446130234068, 0.06350022181549875, null, 0.4009706853994799, 0.3545408134145075, null, 0.4009706853994799, 0.36074062242419414, null, 0.9871639666037187, 0.9728352660627428, null, 0.5857800665405284, 0.6555997118771973, null, 0.2591753914519669, 0.23988807294614056, null, 0.2591753914519669, 0.31730096135007657, null, 0.2591753914519669, 0.16378008859188997, null, 0.2591753914519669, 0.20600689092037183, null, 0.12081699596209272, 0.08944950194952417, null, 0.12081699596209272, 0.10373796866461338, null, 0.12081699596209272, 0.24461086760918826, null, 0.12081699596209272, 0.09337496764275433, null, 0.12081699596209272, 0.029143685842526246, null, 0.12081699596209272, 0.07378531016725698, null, 0.12081699596209272, 0.16378008859188997, null, 0.12081699596209272, 0.19319330264287704, null, 0.12081699596209272, 0.06778804526178739, null, 0.31730096135007657, 0.23988807294614056, null, 0.31730096135007657, 0.3907255813950712, null, 0.31730096135007657, 0.38485904466061915, null, 0.31730096135007657, 0.36372335939599243, null, 0.31730096135007657, 0.20600689092037183, null, 0.0652137818444617, 0.17455022300358247, null, 0.0652137818444617, 0.0740658976328823, null, 0.3907255813950712, 0.44089678526402254, null, 0.3907255813950712, 0.38485904466061915, null, 0.3907255813950712, 0.4384699777119164, null, 0.3907255813950712, 0.36372335939599243, null, 0.3907255813950712, 0.4628255820445688, null, 0.3907255813950712, 0.42123055605352044, null, 0.4628255820445688, 0.44089678526402254, null, 0.4628255820445688, 0.36372335939599243, null, 0.4628255820445688, 0.38485904466061915, null, 0.3559822242935765, 0.36074062242419414, null, 0.3559822242935765, 0.43261428194828966, null, 0.3559822242935765, 0.4076011323289145, null, 0.3559822242935765, 0.2942813311136525, null, 0.3559822242935765, 0.4384699777119164, null, 0.3559822242935765, 0.3085029676380945, null, 0.3559822242935765, 0.24461086760918826, null, 0.3559822242935765, 0.42123055605352044, null, 0.34034683031272595, 0.41823302414071506, null, 0.34034683031272595, 0.37281707542384734, null, 0.34034683031272595, 0.44569470875535344, null, 0.4234244257632893, 0.44610263121268934, null, 0.4234244257632893, 0.44569470875535344, null, 0.4234244257632893, 0.4477916888273489, null, 0.4234244257632893, 0.45310919670590877, null, 0.4234244257632893, 0.3099124541965438, null, 0.4234244257632893, 0.41823302414071506, null, 0.16378008859188997, 0.24461086760918826, null, 0.16378008859188997, 0.23988807294614056, null, 0.16378008859188997, 0.20600689092037183, null, 0.16378008859188997, 0.08944950194952417, null, 0.16378008859188997, 0.10373796866461338, null, 0.2173444602950888, 0.19309552058935997, null, 0.2173444602950888, 0.20324681509857256, null, 0.2173444602950888, 0.15726065366496034, null, 0.2173444602950888, 0.17455022300358247, null, 0.2173444602950888, 0.3099124541965438, null, 0.2173444602950888, 0.22724679364310307, null, 0.2173444602950888, 0.19945793882169716, null, 0.28059040908142474, 0.31148861556919083, null, 0.28059040908142474, 0.31058998399945215, null, 0.28059040908142474, 0.19585942240280918, null, 0.28059040908142474, 0.2777642375867829, null, 0.6070898368290693, 0.5812710944355555, null, 0.6070898368290693, 0.6356640809040811, null, 0.6070898368290693, 0.5799678717948289, null, 0.6070898368290693, 0.7048005885631622, null, 0.41823302414071506, 0.4477916888273489, null, 0.41823302414071506, 0.45310919670590877, null, 0.41823302414071506, 0.44569470875535344, null, 0.41823302414071506, 0.44610263121268934, null, 0.41823302414071506, 0.37281707542384734, null, 0.3806734271447626, 0.2777642375867829, null, 0.3806734271447626, 0.31148861556919083, null, 0.3806734271447626, 0.29222103524212784, null, 0.3806734271447626, 0.31058998399945215, null, 0.3806734271447626, 0.2958146166684136, null, 0.3806734271447626, 0.33867997016860407, null, 0.44569470875535344, 0.44610263121268934, null, 0.44569470875535344, 0.4477916888273489, null, 0.44569470875535344, 0.37281707542384734, null, 0.44569470875535344, 0.45310919670590877, null, 0.38485904466061915, 0.36372335939599243, null, 0.38485904466061915, 0.44089678526402254, null, 0.42123055605352044, 0.43261428194828966, null, 0.42123055605352044, 0.4076011323289145, null, 0.42123055605352044, 0.44089678526402254, null, 0.42123055605352044, 0.4384699777119164, null, 0.42123055605352044, 0.4993589567624287, null, 0.15726065366496034, 0.20324681509857256, null, 0.15726065366496034, 0.11280852698632171, null, 0.15726065366496034, 0.04690775296946825, null, 0.15726065366496034, 0.17455022300358247, null, 0.15726065366496034, 0.12942704693481843, null, 0.15726065366496034, 0.03355285976890332, null, 0.15726065366496034, 0.19945793882169716, null, 0.6480944530526397, 0.722949145455163, null, 0.5741194758631747, 0.6555997118771973, null, 0.5741194758631747, 0.4993589567624287, null, 0.5741194758631747, 0.5881878031653837, null, 0.19585942240280918, 0.31058998399945215, null, 0.19585942240280918, 0.2777642375867829, null, 0.07378531016725698, 0.06778804526178739, null, 0.07378531016725698, 0.08944950194952417, null, 0.07378531016725698, 0.19319330264287704, null, 0.07378531016725698, 0.09337496764275433, null, 0.07378531016725698, 0.029143685842526246, null, 0.07378531016725698, 0.10373796866461338, null, 0.4384699777119164, 0.4076011323289145, null, 0.4384699777119164, 0.43261428194828966, null, 0.4384699777119164, 0.44089678526402254, null, 0.4384699777119164, 0.4993589567624287, null, 0.9670873241765257, 0.9496136493291417, null, 0.04690775296946825, 0.11280852698632171, null, 0.04690775296946825, 0.12942704693481843, null, 0.04690775296946825, 0.03355285976890332, null, 0.705201081256196, 0.7940591740255577, null, 0.705201081256196, 0.6118863415761874, null, 0.705201081256196, 0.7035136186035277, null, 0.705201081256196, 0.7788124583933873, null, 0.705201081256196, 0.7989277845995358, null, 0.705201081256196, 0.8196712631238203, null, 0.705201081256196, 0.7388798490421817, null, 0.11280852698632171, 0.12942704693481843, null, 0.11280852698632171, 0.20324681509857256, null, 0.11280852698632171, 0.03355285976890332, null, 0.9190353113813936, 0.9247685785960813, null, 0.9190353113813936, 0.9351632364768435, null, 0.9190353113813936, 0.9496136493291417, null, 0.5903866310338136, 0.5505414681044513, null, 0.5903866310338136, 0.5711418988170233, null, 0.5903866310338136, 0.51050629532226, null, 0.5903866310338136, 0.6385395509803109, null, 0.5903866310338136, 0.5307973665839751, null, 0.7766251811400071, 0.7940591740255577, null, 0.7766251811400071, 0.7788124583933873, null, 0.7766251811400071, 0.7952389596785292, null, 0.7766251811400071, 0.8249209416597039, null, 0.7766251811400071, 0.8458328760443887, null, 0.7766251811400071, 0.8572154134097416, null, 0.7766251811400071, 0.860944193351868, null, 0.7973770265015475, 0.8323062050044018, null, 0.7973770265015475, 0.7989277845995358, null, 0.7973770265015475, 0.7388798490421817, null, 0.7989277845995358, 0.7035136186035277, null, 0.7989277845995358, 0.7388798490421817, null, 0.7989277845995358, 0.860944193351868, null, 0.7989277845995358, 0.7940591740255577, null, 0.7989277845995358, 0.7788124583933873, null, 0.7989277845995358, 0.8196712631238203, null, 0.7989277845995358, 0.8323062050044018, null, 0.23988807294614056, 0.20600689092037183, null, 0.7035136186035277, 0.8196712631238203, null, 0.7035136186035277, 0.7788124583933873, null, 0.7035136186035277, 0.7388798490421817, null, 0.7035136186035277, 0.7940591740255577, null, 0.12942704693481843, 0.19945793882169716, null, 0.12942704693481843, 0.17455022300358247, null, 0.12942704693481843, 0.20324681509857256, null, 0.12942704693481843, 0.03355285976890332, null, 0.08944950194952417, 0.029143685842526246, null, 0.08944950194952417, 0.10373796866461338, null, 0.45310919670590877, 0.44610263121268934, null, 0.45310919670590877, 0.5443507535396063, null, 0.45310919670590877, 0.4477916888273489, null, 0.2958146166684136, 0.2777642375867829, null, 0.2958146166684136, 0.31148861556919083, null, 0.2958146166684136, 0.26882295265308465, null, 0.2958146166684136, 0.29222103524212784, null, 0.2958146166684136, 0.31058998399945215, null, 0.2958146166684136, 0.25188744056361445, null, 0.2958146166684136, 0.1970230139390673, null, 0.2958146166684136, 0.33867997016860407, null, 0.6118863415761874, 0.5443507535396063, null, 0.6118863415761874, 0.643867839234746, null, 0.6118863415761874, 0.5799678717948289, null, 0.9496136493291417, 0.9247685785960813, null, 0.9496136493291417, 0.9351632364768435, null, 0.10373796866461338, 0.029143685842526246, null, 0.4993589567624287, 0.5881878031653837, null, 0.4993589567624287, 0.44089678526402254, null, 0.4993589567624287, 0.43261428194828966, null, 0.3545408134145075, 0.26882295265308465, null, 0.3545408134145075, 0.36074062242419414, null, 0.3545408134145075, 0.29222103524212784, null, 0.3545408134145075, 0.25188744056361445, null, 0.06778804526178739, 0.09337496764275433, null, 0.06778804526178739, 0.1672742073258523, null, 0.29222103524212784, 0.26882295265308465, null, 0.29222103524212784, 0.33867997016860407, null, 0.29222103524212784, 0.31148861556919083, null, 0.29222103524212784, 0.2777642375867829, null, 0.29222103524212784, 0.25188744056361445, null, 0.29222103524212784, 0.1970230139390673, null, 0.5812710944355555, 0.643867839234746, null, 0.5812710944355555, 0.5799678717948289, null, 0.5812710944355555, 0.6356640809040811, null, 0.20324681509857256, 0.17455022300358247, null, 0.20324681509857256, 0.22724679364310307, null, 0.20324681509857256, 0.19945793882169716, null, 0.09337496764275433, 0.06350022181549875, null, 0.09337496764275433, 0.1672742073258523, null, 0.09337496764275433, 0.19573094509632516, null, 0.7788124583933873, 0.7940591740255577, null, 0.7788124583933873, 0.8323062050044018, null, 0.7788124583933873, 0.860944193351868, null, 0.7788124583933873, 0.8196712631238203, null, 0.7788124583933873, 0.7388798490421817, null, 0.19945793882169716, 0.17455022300358247, null, 0.19945793882169716, 0.22724679364310307, null, 0.51050629532226, 0.5505414681044513, null, 0.51050629532226, 0.5307973665839751, null, 0.51050629532226, 0.5711418988170233, null, 0.8323062050044018, 0.8196712631238203, null, 0.8323062050044018, 0.7388798490421817, null, 0.06350022181549875, 0.1672742073258523, null, 0.8196712631238203, 0.7388798490421817, null, 0.8196712631238203, 0.860944193351868, null, 0.8196712631238203, 0.7940591740255577, null, 0.9115758170564746, 0.8782894991450778, null, 0.9115758170564746, 0.9092444906434977, null, 0.9115758170564746, 0.9538764114888266, null, 0.9115758170564746, 0.9344061624607939, null, 0.8572154134097416, 0.860944193351868, null, 0.8572154134097416, 0.8249209416597039, null, 0.8572154134097416, 0.7952389596785292, null, 0.8572154134097416, 0.7940591740255577, null, 0.8572154134097416, 0.8458328760443887, null, 0.8572154134097416, 0.9242379279668322, null, 0.2330927671213927, 0.2942813311136525, null, 0.2330927671213927, 0.3085029676380945, null, 0.2330927671213927, 0.19319330264287704, null, 0.2330927671213927, 0.1672742073258523, null, 0.2330927671213927, 0.19573094509632516, null, 0.2330927671213927, 0.24461086760918826, null, 0.19309552058935997, 0.17455022300358247, null, 0.19309552058935997, 0.22724679364310307, null, 0.43261428194828966, 0.47137988913898343, null, 0.43261428194828966, 0.4076011323289145, null, 0.43261428194828966, 0.3085029676380945, null, 0.5443507535396063, 0.4477916888273489, null, 0.5443507535396063, 0.5799678717948289, null, 0.5443507535396063, 0.643867839234746, null, 0.31148861556919083, 0.26882295265308465, null, 0.31148861556919083, 0.25188744056361445, null, 0.31148861556919083, 0.31058998399945215, null, 0.31148861556919083, 0.33867997016860407, null, 0.31148861556919083, 0.2777642375867829, null, 0.3099124541965438, 0.22724679364310307, null, 0.36372335939599243, 0.44089678526402254, null, 0.36074062242419414, 0.47137988913898343, null, 0.36074062242419414, 0.4076011323289145, null, 0.36074062242419414, 0.2942813311136525, null, 0.2942813311136525, 0.19319330264287704, null, 0.2942813311136525, 0.24461086760918826, null, 0.2942813311136525, 0.19573094509632516, null, 0.2942813311136525, 0.3085029676380945, null, 0.2942813311136525, 0.4076011323289145, null, 0.24461086760918826, 0.19319330264287704, null, 0.24461086760918826, 0.3085029676380945, null, 0.24461086760918826, 0.19573094509632516, null, 0.9344061624607939, 0.9538764114888266, null, 0.9344061624607939, 0.9092444906434977, null, 0.9344061624607939, 0.8782894991450778, null, 0.19319330264287704, 0.19573094509632516, null, 0.37281707542384734, 0.44610263121268934, null, 0.7952389596785292, 0.8249209416597039, null, 0.7952389596785292, 0.7940591740255577, null, 0.7952389596785292, 0.860944193351868, null, 0.7952389596785292, 0.8458328760443887, null, 0.44610263121268934, 0.4477916888273489, null, 0.9538764114888266, 0.9093621603490467, null, 0.9538764114888266, 0.9092444906434977, null, 0.47137988913898343, 0.4076011323289145, null, 0.22724679364310307, 0.17455022300358247, null, 0.5799678717948289, 0.643867839234746, null, 0.5799678717948289, 0.6356640809040811, null, 0.25188744056361445, 0.1672742073258523, null, 0.25188744056361445, 0.26882295265308465, null, 0.25188744056361445, 0.1970230139390673, null, 0.6385395509803109, 0.5711418988170233, null, 0.6385395509803109, 0.5307973665839751, null, 0.6385395509803109, 0.5505414681044513, null, 0.33867997016860407, 0.31058998399945215, null, 0.33867997016860407, 0.26882295265308465, null, 0.33867997016860407, 0.2777642375867829, null, 0.6356640809040811, 0.7048005885631622, null, 0.6356640809040811, 0.643867839234746, null, 0.1672742073258523, 0.26882295265308465, null, 0.1672742073258523, 0.1970230139390673, null, 0.1672742073258523, 0.19573094509632516, null, 0.9092444906434977, 0.9093621603490467, null, 0.2777642375867829, 0.31058998399945215, null, 0.9247685785960813, 0.9351632364768435, null, 0.8458328760443887, 0.860944193351868, null, 0.8458328760443887, 0.7940591740255577, null, 0.8458328760443887, 0.9242379279668322, null, 0.8458328760443887, 0.8249209416597039, null, 0.5505414681044513, 0.5711418988170233, null, 0.5505414681044513, 0.5307973665839751, null, 0.4076011323289145, 0.3085029676380945, null, 0.5711418988170233, 0.5307973665839751, null, 0.8249209416597039, 0.860944193351868, null, 0.8249209416597039, 0.9242379279668322, null, 0.26882295265308465, 0.1970230139390673, null, 0.7940591740255577, 0.860944193351868, null, 0.7940591740255577, 0.7388798490421817, null], "y": [0.13526930498129897, 0.12499484644792969, null, 0.13526930498129897, 0.1216072756927653, null, 0.13526930498129897, 0.11929345875600827, null, 0.13526930498129897, 0.04588973991253498, null, 0.13526930498129897, 0.14484890700941322, null, 0.13526930498129897, 0.15994386993759702, null, 0.13526930498129897, 0.0645278490226382, null, 0.13526930498129897, 0.2153934616573724, null, 0.13526930498129897, 0.04850639374743393, null, 0.023727961332869585, 0.06251964438918212, null, 0.023727961332869585, 0.018742674199284992, null, 0.023727961332869585, 0.06515205986677308, null, 0.023727961332869585, 0.04207419576140037, null, 0.023727961332869585, 0.09792584747146282, null, 0.023727961332869585, 0.060400166110335274, null, 0.023727961332869585, 0.03600696026251382, null, 0.9459917354663355, 0.8969183581245227, null, 0.9459917354663355, 0.8721952654644207, null, 0.9459917354663355, 0.9115825899729741, null, 0.9459917354663355, 0.9558163454692462, null, 0.9459917354663355, 0.8611646220404794, null, 0.9459917354663355, 0.8549574006104147, null, 0.9459917354663355, 0.8761551557367593, null, 0.1397933785390162, 0.15994386993759702, null, 0.1397933785390162, 0.05883547794610988, null, 0.1397933785390162, 0.2153934616573724, null, 0.1397933785390162, 0.018899092845912957, null, 0.1397933785390162, 0.04850639374743393, null, 0.1397933785390162, 0.1534939428430152, null, 0.1397933785390162, 0.031276810133041955, null, 0.1397933785390162, 0.14484890700941322, null, 0.1397933785390162, 0.15246108240954048, null, 0.1397933785390162, 0.1216072756927653, null, 0.1397933785390162, 0.12499484644792969, null, 0.1397933785390162, 0.0645278490226382, null, 0.5493114334843303, 0.5629301459818352, null, 0.5493114334843303, 0.5669352095087468, null, 0.5493114334843303, 0.66764618725917, null, 0.5493114334843303, 0.4857716646500987, null, 0.5493114334843303, 0.6535956563875143, null, 0.5493114334843303, 0.581323487530803, null, 0.2910326462906512, 0.328045839311933, null, 0.2910326462906512, 0.384594444864403, null, 0.2910326462906512, 0.24255497876141419, null, 0.2910326462906512, 0.21227305244794714, null, 0.2910326462906512, 0.2971721948619802, null, 0.2910326462906512, 0.26601087368891985, null, 0.2910326462906512, 0.3933132350865912, null, 0.7645372040009379, 0.7530024747101416, null, 0.7645372040009379, 0.7632062536099553, null, 0.7645372040009379, 0.6464563236512437, null, 0.7645372040009379, 0.7121292652088373, null, 0.7645372040009379, 0.8062429909302403, null, 0.7645372040009379, 0.8123407596551933, null, 0.7645372040009379, 0.804568554539619, null, 0.7645372040009379, 0.8492488008851006, null, 0.7645372040009379, 0.8108632800261676, null, 0.6576842574496234, 0.6321011445202953, null, 0.6576842574496234, 0.7805070442116522, null, 0.6576842574496234, 0.6972479982124109, null, 0.6576842574496234, 0.6096751347867629, null, 0.6576842574496234, 0.6942270151346928, null, 0.6576842574496234, 0.6104684100799159, null, 0.6576842574496234, 0.6872610419622476, null, 0.6576842574496234, 0.7300771635952249, null, 0.6576842574496234, 0.5747457743943686, null, 0.6576842574496234, 0.6857298491340494, null, 0.6576842574496234, 0.642477164385424, null, 0.031276810133041955, 0.0645278490226382, null, 0.031276810133041955, 0.05883547794610988, null, 0.031276810133041955, 0.018899092845912957, null, 0.031276810133041955, 0.04850639374743393, null, 0.031276810133041955, 0.04588973991253498, null, 0.031276810133041955, 0.14484890700941322, null, 0.031276810133041955, 0.1216072756927653, null, 0.031276810133041955, 0.12499484644792969, null, 0.4590091718408418, 0.5243257053503286, null, 0.4590091718408418, 0.3934877485262872, null, 0.4590091718408418, 0.4327674958812908, null, 0.4590091718408418, 0.44057205438232094, null, 0.4590091718408418, 0.5112321842448565, null, 0.4590091718408418, 0.46970078476892596, null, 0.4590091718408418, 0.4754021177625021, null, 0.4590091718408418, 0.3960284383594811, null, 0.31512886260802586, 0.26375546839795383, null, 0.31512886260802586, 0.364741224412758, null, 0.31512886260802586, 0.2396225843843952, null, 0.31512886260802586, 0.21458014606304776, null, 0.31512886260802586, 0.20052788570280866, null, 0.31512886260802586, 0.33052321636808935, null, 0.31512886260802586, 0.3934877485262872, null, 0.31512886260802586, 0.31474837310177817, null, 0.31512886260802586, 0.2079018937432775, null, 0.31512886260802586, 0.39013031405086496, null, 0.31512886260802586, 0.36233035771481437, null, 0.9172625756297638, 0.8123407596551933, null, 0.9172625756297638, 0.8951193059948415, null, 0.9172625756297638, 0.9156400477004524, null, 0.9172625756297638, 0.9093604183680671, null, 0.9172625756297638, 0.997356073943379, null, 0.9172625756297638, 0.8320688555544364, null, 0.9172625756297638, 0.9179588808958042, null, 0.9172625756297638, 0.9195817600707068, null, 0.9172625756297638, 0.926046940924531, null, 0.9172625756297638, 0.903876041072764, null, 0.9172625756297638, 0.967119873086269, null, 0.9172625756297638, 0.8492488008851006, null, 0.04374310679298565, 0.007618376837648433, null, 0.04374310679298565, 0.022945574766746746, null, 0.04374310679298565, 0.07013452779634244, null, 0.04374310679298565, 0.07450590519997446, null, 0.04374310679298565, 0.11536895534762781, null, 0.04374310679298565, 0.0017678590772415292, null, 0.04374310679298565, 0.11082228177754083, null, 0.04374310679298565, 0.16820011213998332, null, 0.04374310679298565, 0.10055560632714533, null, 0.04374310679298565, 0.1296003610701415, null, 0.6504165694281814, 0.6497216921948329, null, 0.6504165694281814, 0.6840199139604201, null, 0.6504165694281814, 0.737646330484935, null, 0.6504165694281814, 0.6796461137037179, null, 0.6504165694281814, 0.7310762414697035, null, 0.6504165694281814, 0.6473005866251652, null, 0.6504165694281814, 0.7612568106335946, null, 0.6504165694281814, 0.5629301459818352, null, 0.6504165694281814, 0.66764618725917, null, 0.6504165694281814, 0.7403757798556933, null, 0.6504165694281814, 0.581323487530803, null, 0.5629301459818352, 0.5320545885300109, null, 0.5629301459818352, 0.6497216921948329, null, 0.5629301459818352, 0.6473005866251652, null, 0.5629301459818352, 0.5081434199436198, null, 0.5629301459818352, 0.4857716646500987, null, 0.5629301459818352, 0.5135299843370144, null, 0.5629301459818352, 0.4964225781842716, null, 0.5629301459818352, 0.581323487530803, null, 0.5629301459818352, 0.5252126265950375, null, 0.8123407596551933, 0.8492488008851006, null, 0.8123407596551933, 0.804568554539619, null, 0.8123407596551933, 0.903876041072764, null, 0.8123407596551933, 0.9195817600707068, null, 0.8123407596551933, 0.8062429909302403, null, 0.8123407596551933, 0.8320688555544364, null, 0.8123407596551933, 0.9179588808958042, null, 0.8123407596551933, 0.7121292652088373, null, 0.8123407596551933, 0.7632062536099553, null, 0.8123407596551933, 0.7530024747101416, null, 0.8123407596551933, 0.8108632800261676, null, 0.8123407596551933, 0.8951193059948415, null, 0.1216072756927653, 0.15994386993759702, null, 0.1216072756927653, 0.018899092845912957, null, 0.1216072756927653, 0.11929345875600827, null, 0.1216072756927653, 0.2153934616573724, null, 0.1216072756927653, 0.04850639374743393, null, 0.1216072756927653, 0.04588973991253498, null, 0.1216072756927653, 0.05883547794610988, null, 0.1216072756927653, 0.14484890700941322, null, 0.1216072756927653, 0.0645278490226382, null, 0.1216072756927653, 0.12499484644792969, null, 0.3446480913941109, 0.3165294812043965, null, 0.3446480913941109, 0.3702246020484862, null, 0.3446480913941109, 0.36737432447931917, null, 0.3446480913941109, 0.36580133579512997, null, 0.5450520034516552, 0.44057205438232094, null, 0.5450520034516552, 0.642477164385424, null, 0.5450520034516552, 0.6321011445202953, null, 0.5450520034516552, 0.5243257053503286, null, 0.5450520034516552, 0.5873623032873929, null, 0.5450520034516552, 0.5964708894448989, null, 0.5450520034516552, 0.5897715677940957, null, 0.5450520034516552, 0.4274373927298899, null, 0.5450520034516552, 0.44315040688448404, null, 0.5450520034516552, 0.6096751347867629, null, 0.2396225843843952, 0.1296003610701415, null, 0.2396225843843952, 0.26601087368891985, null, 0.2396225843843952, 0.20052788570280866, null, 0.2396225843843952, 0.328045839311933, null, 0.2396225843843952, 0.21227305244794714, null, 0.2396225843843952, 0.21458014606304776, null, 0.2396225843843952, 0.2079018937432775, null, 0.2396225843843952, 0.26375546839795383, null, 0.2396225843843952, 0.24255497876141419, null, 0.2396225843843952, 0.1966054615107885, null, 0.2396225843843952, 0.16820011213998332, null, 0.5747457743943686, 0.6857298491340494, null, 0.5747457743943686, 0.5060359085607702, null, 0.5747457743943686, 0.5122100109134189, null, 0.5747457743943686, 0.6096751347867629, null, 0.5747457743943686, 0.6321011445202953, null, 0.5747457743943686, 0.6104684100799159, null, 0.5747457743943686, 0.642477164385424, null, 0.5747457743943686, 0.5323128108750551, null, 0.5747457743943686, 0.6942270151346928, null, 0.2971721948619802, 0.384594444864403, null, 0.6321011445202953, 0.5897715677940957, null, 0.6321011445202953, 0.6096751347867629, null, 0.6321011445202953, 0.6104684100799159, null, 0.6321011445202953, 0.6942270151346928, null, 0.6321011445202953, 0.6972479982124109, null, 0.6321011445202953, 0.6857298491340494, null, 0.6321011445202953, 0.7300771635952249, null, 0.6321011445202953, 0.642477164385424, null, 0.6321011445202953, 0.5964708894448989, null, 0.737646330484935, 0.7310762414697035, null, 0.737646330484935, 0.7849845714597692, null, 0.737646330484935, 0.7612568106335946, null, 0.737646330484935, 0.6840199139604201, null, 0.737646330484935, 0.8291724495033767, null, 0.737646330484935, 0.6497216921948329, null, 0.737646330484935, 0.6933728269749324, null, 0.737646330484935, 0.6473005866251652, null, 0.8492488008851006, 0.804568554539619, null, 0.8492488008851006, 0.9195817600707068, null, 0.8492488008851006, 0.8108632800261676, null, 0.8492488008851006, 0.8951193059948415, null, 0.8492488008851006, 0.8062429909302403, null, 0.8492488008851006, 0.9156400477004524, null, 0.8492488008851006, 0.7530024747101416, null, 0.8492488008851006, 0.903876041072764, null, 0.8492488008851006, 0.9179588808958042, null, 0.8492488008851006, 0.967119873086269, null, 0.23507984591810205, 0.14419115153553996, null, 0.23507984591810205, 0.20052788570280866, null, 0.23507984591810205, 0.33862659118064153, null, 0.23507984591810205, 0.26375546839795383, null, 0.23507984591810205, 0.20838120023923823, null, 0.23507984591810205, 0.31474837310177817, null, 0.6872610419622476, 0.6857298491340494, null, 0.6872610419622476, 0.6104684100799159, null, 0.6872610419622476, 0.6674667644893176, null, 0.6872610419622476, 0.7478292526611813, null, 0.6872610419622476, 0.6476497050447253, null, 0.6872610419622476, 0.7871442960384691, null, 0.6872610419622476, 0.6459586415454817, null, 0.6872610419622476, 0.6942270151346928, null, 0.6535956563875143, 0.7429862386102624, null, 0.6535956563875143, 0.5669352095087468, null, 0.6535956563875143, 0.6476497050447253, null, 0.6535956563875143, 0.6796461137037179, null, 0.6535956563875143, 0.66764618725917, null, 0.6535956563875143, 0.6937325416475308, null, 0.6535956563875143, 0.6459586415454817, null, 0.7478292526611813, 0.6937325416475308, null, 0.7478292526611813, 0.8563027985803431, null, 0.7478292526611813, 0.7690232666943452, null, 0.7478292526611813, 0.7429862386102624, null, 0.7478292526611813, 0.7871442960384691, null, 0.7478292526611813, 0.7989343622524816, null, 0.7478292526611813, 0.6476497050447253, null, 0.7478292526611813, 0.6459586415454817, null, 0.7478292526611813, 0.6674667644893176, null, 0.6459586415454817, 0.6857298491340494, null, 0.6459586415454817, 0.6674667644893176, null, 0.6459586415454817, 0.5669352095087468, null, 0.6459586415454817, 0.6476497050447253, null, 0.3165294812043965, 0.36580133579512997, null, 0.3165294812043965, 0.3923092612306702, null, 0.3165294812043965, 0.3441410156081377, null, 0.3165294812043965, 0.36737432447931917, null, 0.15994386993759702, 0.11929345875600827, null, 0.15994386993759702, 0.12499484644792969, null, 0.15994386993759702, 0.04850639374743393, null, 0.15994386993759702, 0.14484890700941322, null, 0.15994386993759702, 0.15246108240954048, null, 0.15994386993759702, 0.1534939428430152, null, 0.15994386993759702, 0.0645278490226382, null, 0.15994386993759702, 0.05883547794610988, null, 0.15994386993759702, 0.2153934616573724, null, 0.1534939428430152, 0.05883547794610988, null, 0.1534939428430152, 0.15246108240954048, null, 0.1534939428430152, 0.18850905118317085, null, 0.18850905118317085, 0.15246108240954048, null, 0.18850905118317085, 0.09792584747146282, null, 0.07013452779634244, 0.07450590519997446, null, 0.07013452779634244, 0.13859685161004287, null, 0.07013452779634244, 0.10055560632714533, null, 0.07013452779634244, 0.022945574766746746, null, 0.07013452779634244, 0.1296003610701415, null, 0.07013452779634244, 0.11536895534762781, null, 0.07013452779634244, 0.11082228177754083, null, 0.07013452779634244, 0.07933468012625022, null, 0.01428066400923833, 0.007618376837648433, null, 0.01428066400923833, 0.010465333826459311, null, 0.01428066400923833, 0.08570732206032672, null, 0.8320688555544364, 0.7632062536099553, null, 0.8320688555544364, 0.9093604183680671, null, 0.8320688555544364, 0.926046940924531, null, 0.05883547794610988, 0.04850639374743393, null, 0.05883547794610988, 0.0645278490226382, null, 0.05883547794610988, 0.14484890700941322, null, 0.05883547794610988, 0.15246108240954048, null, 0.05883547794610988, 0.018899092845912957, null, 0.05883547794610988, 0.12499484644792969, null, 0.010465333826459311, 0.08570732206032672, null, 0.010465333826459311, 0.007618376837648433, null, 0.08570732206032672, 0.007618376837648433, null, 0.08570732206032672, 0.14419115153553996, null, 0.9195817600707068, 0.8062429909302403, null, 0.9195817600707068, 0.997356073943379, null, 0.9195817600707068, 0.903876041072764, null, 0.9195817600707068, 0.967119873086269, null, 0.9195817600707068, 0.8951193059948415, null, 0.9195817600707068, 0.926046940924531, null, 0.9195817600707068, 0.9156400477004524, null, 0.9195817600707068, 0.9179588808958042, null, 0.9195817600707068, 0.9093604183680671, null, 0.9029733651708146, 0.9581330178204164, null, 0.9029733651708146, 0.8846388172676177, null, 0.9029733651708146, 0.9555681649865296, null, 0.9029733651708146, 0.8331204160451039, null, 0.9029733651708146, 0.9169770417622112, null, 0.9029733651708146, 0.8233983503485154, null, 0.9029733651708146, 0.8844066227735533, null, 0.9029733651708146, 0.9118232255717322, null, 0.9029733651708146, 0.7805070442116522, null, 0.9029733651708146, 0.8312143480313637, null, 0.9029733651708146, 0.833913921942627, null, 0.9029733651708146, 0.8043729607762939, null, 0.39013031405086496, 0.3934877485262872, null, 0.39013031405086496, 0.41352469234901346, null, 0.39013031405086496, 0.36233035771481437, null, 0.39013031405086496, 0.44067102675923764, null, 0.39013031405086496, 0.3933132350865912, null, 0.39013031405086496, 0.364741224412758, null, 0.39013031405086496, 0.4274373927298899, null, 0.39013031405086496, 0.44315040688448404, null, 0.39013031405086496, 0.44057205438232094, null, 0.39013031405086496, 0.328045839311933, null, 0.39013031405086496, 0.33052321636808935, null, 0.39013031405086496, 0.4326854455892708, null, 0.3441410156081377, 0.33564711630454, null, 0.3441410156081377, 0.3923092612306702, null, 0.11929345875600827, 0.04588973991253498, null, 0.11929345875600827, 0.04850639374743393, null, 0.11929345875600827, 0.12499484644792969, null, 0.11929345875600827, 0.14484890700941322, null, 0.11929345875600827, 0.0645278490226382, null, 0.6102195977122576, 0.5948603733443145, null, 0.6102195977122576, 0.6479251533108438, null, 0.7939335740030563, 0.7403757798556933, null, 0.7939335740030563, 0.7429862386102624, null, 0.7939335740030563, 0.7690232666943452, null, 0.7939335740030563, 0.7310762414697035, null, 0.7939335740030563, 0.9115825899729741, null, 0.7939335740030563, 0.8549574006104147, null, 0.7939335740030563, 0.7989343622524816, null, 0.7939335740030563, 0.7692586035953708, null, 0.7939335740030563, 0.6937325416475308, null, 0.7939335740030563, 0.8761551557367593, null, 0.7939335740030563, 0.8563027985803431, null, 0.6464563236512437, 0.5243257053503286, null, 0.6464563236512437, 0.7121292652088373, null, 0.6464563236512437, 0.6479251533108438, null, 0.6464563236512437, 0.7530024747101416, null, 0.6464563236512437, 0.5897715677940957, null, 0.6464563236512437, 0.5964708894448989, null, 0.6464563236512437, 0.5873623032873929, null, 0.9434917963009402, 0.9453564539969547, null, 0.9434917963009402, 0.8563027985803431, null, 0.9434917963009402, 0.9790881991990368, null, 0.9434917963009402, 0.9317218644740645, null, 0.9434917963009402, 0.988164110858574, null, 0.9434917963009402, 0.9115825899729741, null, 0.9434917963009402, 0.9044457967412433, null, 0.9434917963009402, 0.972197305811158, null, 0.9434917963009402, 0.931529409242805, null, 0.9115825899729741, 0.8761551557367593, null, 0.9115825899729741, 0.8969183581245227, null, 0.9115825899729741, 0.8721952654644207, null, 0.9115825899729741, 0.8611646220404794, null, 0.9115825899729741, 0.931529409242805, null, 0.9115825899729741, 0.8549574006104147, null, 0.9115825899729741, 0.8563027985803431, null, 0.9115825899729741, 0.9317218644740645, null, 0.9115825899729741, 0.972197305811158, null, 0.13859685161004287, 0.11536895534762781, null, 0.13859685161004287, 0.07933468012625022, null, 0.13859685161004287, 0.21227305244794714, null, 0.13859685161004287, 0.11082228177754083, null, 0.13859685161004287, 0.04207419576140037, null, 0.7121292652088373, 0.7530024747101416, null, 0.7121292652088373, 0.7632062536099553, null, 0.7121292652088373, 0.6479251533108438, null, 0.7121292652088373, 0.8062429909302403, null, 0.4857716646500987, 0.5081434199436198, null, 0.4857716646500987, 0.3923092612306702, null, 0.4857716646500987, 0.5252126265950375, null, 0.4857716646500987, 0.581323487530803, null, 0.4857716646500987, 0.4964225781842716, null, 0.060400166110335274, 0.06515205986677308, null, 0.060400166110335274, 0.06251964438918212, null, 0.060400166110335274, 0.018742674199284992, null, 0.060400166110335274, 0.04207419576140037, null, 0.060400166110335274, 0.09792584747146282, null, 0.060400166110335274, 0.03600696026251382, null, 0.060400166110335274, 0.07933468012625022, null, 0.988164110858574, 0.9317218644740645, null, 0.988164110858574, 0.931529409242805, null, 0.988164110858574, 0.9790881991990368, null, 0.988164110858574, 0.9453564539969547, null, 0.988164110858574, 0.9044457967412433, null, 0.988164110858574, 0.9918275707060329, null, 0.931529409242805, 0.9453564539969547, null, 0.931529409242805, 0.972197305811158, null, 0.931529409242805, 0.9044457967412433, null, 0.931529409242805, 0.9790881991990368, null, 0.931529409242805, 0.9317218644740645, null, 0.931529409242805, 0.8563027985803431, null, 0.8291724495033767, 0.7849845714597692, null, 0.8291724495033767, 0.8721952654644207, null, 0.8291724495033767, 0.8611646220404794, null, 0.8291724495033767, 0.7612568106335946, null, 0.8291724495033767, 0.9272459756422667, null, 0.967119873086269, 0.997356073943379, null, 0.967119873086269, 0.8951193059948415, null, 0.967119873086269, 0.9156400477004524, null, 0.967119873086269, 0.903876041072764, null, 0.967119873086269, 0.9179588808958042, null, 0.4274373927298899, 0.44067102675923764, null, 0.4274373927298899, 0.4326854455892708, null, 0.4274373927298899, 0.3934877485262872, null, 0.4274373927298899, 0.36233035771481437, null, 0.4274373927298899, 0.44315040688448404, null, 0.4274373927298899, 0.364741224412758, null, 0.4274373927298899, 0.44057205438232094, null, 0.4274373927298899, 0.41352469234901346, null, 0.6473005866251652, 0.6796461137037179, null, 0.6473005866251652, 0.7612568106335946, null, 0.6473005866251652, 0.7403757798556933, null, 0.6473005866251652, 0.66764618725917, null, 0.6473005866251652, 0.7310762414697035, null, 0.6473005866251652, 0.581323487530803, null, 0.6473005866251652, 0.6497216921948329, null, 0.7300771635952249, 0.7530024747101416, null, 0.7300771635952249, 0.642477164385424, null, 0.7300771635952249, 0.6942270151346928, null, 0.7300771635952249, 0.8233983503485154, null, 0.7300771635952249, 0.804568554539619, null, 0.7300771635952249, 0.8108632800261676, null, 0.7300771635952249, 0.8043729607762939, null, 0.7300771635952249, 0.6972479982124109, null, 0.03600696026251382, 0.06251964438918212, null, 0.03600696026251382, 0.018742674199284992, null, 0.03600696026251382, 0.09792584747146282, null, 0.03600696026251382, 0.04207419576140037, null, 0.03600696026251382, 0.06515205986677308, null, 0.03600696026251382, 0.07933468012625022, null, 0.5252126265950375, 0.5135299843370144, null, 0.5252126265950375, 0.477296869228503, null, 0.5252126265950375, 0.5081434199436198, null, 0.5252126265950375, 0.5320545885300109, null, 0.5252126265950375, 0.4964225781842716, null, 0.9272459756422667, 0.9558163454692462, null, 0.7612568106335946, 0.6497216921948329, null, 0.7612568106335946, 0.8611646220404794, null, 0.7612568106335946, 0.7692586035953708, null, 0.7612568106335946, 0.8721952654644207, null, 0.7612568106335946, 0.6796461137037179, null, 0.7612568106335946, 0.7403757798556933, null, 0.7612568106335946, 0.7849845714597692, null, 0.7612568106335946, 0.7310762414697035, null, 0.8043729607762939, 0.833913921942627, null, 0.8043729607762939, 0.8108632800261676, null, 0.8043729607762939, 0.7805070442116522, null, 0.8043729607762939, 0.6942270151346928, null, 0.8043729607762939, 0.6972479982124109, null, 0.8043729607762939, 0.804568554539619, null, 0.8043729607762939, 0.8331204160451039, null, 0.8043729607762939, 0.8312143480313637, null, 0.8043729607762939, 0.8233983503485154, null, 0.9918275707060329, 0.9169770417622112, null, 0.9918275707060329, 0.8844066227735533, null, 0.9918275707060329, 0.9118232255717322, null, 0.9918275707060329, 0.9044457967412433, null, 0.9918275707060329, 0.8846388172676177, null, 0.9918275707060329, 0.9790881991990368, null, 0.9918275707060329, 0.9453564539969547, null, 0.41352469234901346, 0.328045839311933, null, 0.41352469234901346, 0.44057205438232094, null, 0.41352469234901346, 0.5060359085607702, null, 0.41352469234901346, 0.384594444864403, null, 0.41352469234901346, 0.44067102675923764, null, 0.41352469234901346, 0.364741224412758, null, 0.41352469234901346, 0.44315040688448404, null, 0.41352469234901346, 0.4326854455892708, null, 0.41352469234901346, 0.45126010531011573, null, 0.41352469234901346, 0.3933132350865912, null, 0.7690232666943452, 0.6476497050447253, null, 0.7690232666943452, 0.8563027985803431, null, 0.7690232666943452, 0.6674667644893176, null, 0.7690232666943452, 0.7989343622524816, null, 0.7690232666943452, 0.7871442960384691, null, 0.7690232666943452, 0.7429862386102624, null, 0.36580133579512997, 0.36737432447931917, null, 0.36580133579512997, 0.3702246020484862, null, 0.44067102675923764, 0.384594444864403, null, 0.44067102675923764, 0.44315040688448404, null, 0.44067102675923764, 0.5122100109134189, null, 0.44067102675923764, 0.5060359085607702, null, 0.44067102675923764, 0.45126010531011573, null, 0.44067102675923764, 0.3933132350865912, null, 0.44067102675923764, 0.364741224412758, null, 0.44067102675923764, 0.44057205438232094, null, 0.44067102675923764, 0.4326854455892708, null, 0.44067102675923764, 0.328045839311933, null, 0.21227305244794714, 0.16820011213998332, null, 0.21227305244794714, 0.21458014606304776, null, 0.21227305244794714, 0.11536895534762781, null, 0.21227305244794714, 0.11082228177754083, null, 0.21227305244794714, 0.1296003610701415, null, 0.21227305244794714, 0.328045839311933, null, 0.21227305244794714, 0.24255497876141419, null, 0.21227305244794714, 0.1966054615107885, null, 0.21227305244794714, 0.26601087368891985, null, 0.6674667644893176, 0.6857298491340494, null, 0.6674667644893176, 0.6104684100799159, null, 0.6674667644893176, 0.7871442960384691, null, 0.6674667644893176, 0.6476497050447253, null, 0.7805070442116522, 0.8331204160451039, null, 0.7805070442116522, 0.6942270151346928, null, 0.7805070442116522, 0.6857298491340494, null, 0.7805070442116522, 0.8844066227735533, null, 0.7805070442116522, 0.8233983503485154, null, 0.7805070442116522, 0.833913921942627, null, 0.7805070442116522, 0.8312143480313637, null, 0.7805070442116522, 0.6972479982124109, null, 0.7805070442116522, 0.8846388172676177, null, 0.5948603733443145, 0.5112321842448565, null, 0.5948603733443145, 0.6479251533108438, null, 0.5135299843370144, 0.477296869228503, null, 0.5135299843370144, 0.5081434199436198, null, 0.5135299843370144, 0.4964225781842716, null, 0.5135299843370144, 0.5320545885300109, null, 0.8844066227735533, 0.9169770417622112, null, 0.8844066227735533, 0.833913921942627, null, 0.8844066227735533, 0.9044457967412433, null, 0.8844066227735533, 0.9453564539969547, null, 0.8844066227735533, 0.8846388172676177, null, 0.8844066227735533, 0.7871442960384691, null, 0.8844066227735533, 0.8312143480313637, null, 0.8844066227735533, 0.8331204160451039, null, 0.8844066227735533, 0.9118232255717322, null, 0.16820011213998332, 0.20052788570280866, null, 0.16820011213998332, 0.11082228177754083, null, 0.16820011213998332, 0.1296003610701415, null, 0.16820011213998332, 0.1966054615107885, null, 0.16820011213998332, 0.24255497876141419, null, 0.16820011213998332, 0.2079018937432775, null, 0.16820011213998332, 0.07450590519997446, null, 0.16820011213998332, 0.21458014606304776, null, 0.16820011213998332, 0.11536895534762781, null, 0.16820011213998332, 0.10055560632714533, null, 0.36737432447931917, 0.3702246020484862, null, 0.04588973991253498, 0.12499484644792969, null, 0.04588973991253498, 0.018899092845912957, null, 0.04588973991253498, 0.14484890700941322, null, 0.04588973991253498, 0.0645278490226382, null, 0.04588973991253498, 0.04850639374743393, null, 0.14419115153553996, 0.20838120023923823, null, 0.26601087368891985, 0.24255497876141419, null, 0.26601087368891985, 0.328045839311933, null, 0.6933728269749324, 0.6840199139604201, null, 0.6476497050447253, 0.5669352095087468, null, 0.5964708894448989, 0.5897715677940957, null, 0.5964708894448989, 0.642477164385424, null, 0.5964708894448989, 0.5243257053503286, null, 0.5964708894448989, 0.5873623032873929, null, 0.4327674958812908, 0.4754021177625021, null, 0.4327674958812908, 0.5112321842448565, null, 0.4327674958812908, 0.44057205438232094, null, 0.4327674958812908, 0.31474837310177817, null, 0.4327674958812908, 0.46970078476892596, null, 0.4327674958812908, 0.3960284383594811, null, 0.4327674958812908, 0.5243257053503286, null, 0.4327674958812908, 0.3934877485262872, null, 0.4327674958812908, 0.33862659118064153, null, 0.642477164385424, 0.5897715677940957, null, 0.642477164385424, 0.6096751347867629, null, 0.642477164385424, 0.6942270151346928, null, 0.642477164385424, 0.6972479982124109, null, 0.642477164385424, 0.5873623032873929, null, 0.7632062536099553, 0.8062429909302403, null, 0.7632062536099553, 0.6479251533108438, null, 0.6096751347867629, 0.6104684100799159, null, 0.6096751347867629, 0.6942270151346928, null, 0.6096751347867629, 0.5122100109134189, null, 0.6096751347867629, 0.6972479982124109, null, 0.6096751347867629, 0.6857298491340494, null, 0.6096751347867629, 0.5060359085607702, null, 0.6857298491340494, 0.6104684100799159, null, 0.6857298491340494, 0.6972479982124109, null, 0.6857298491340494, 0.6942270151346928, null, 0.4326854455892708, 0.328045839311933, null, 0.4326854455892708, 0.45126010531011573, null, 0.4326854455892708, 0.3933132350865912, null, 0.4326854455892708, 0.364741224412758, null, 0.4326854455892708, 0.5122100109134189, null, 0.4326854455892708, 0.44315040688448404, null, 0.4326854455892708, 0.44057205438232094, null, 0.4326854455892708, 0.5060359085607702, null, 0.9555681649865296, 0.9118232255717322, null, 0.9555681649865296, 0.9581330178204164, null, 0.9555681649865296, 0.9169770417622112, null, 0.8331204160451039, 0.8846388172676177, null, 0.8331204160451039, 0.9169770417622112, null, 0.8331204160451039, 0.8312143480313637, null, 0.8331204160451039, 0.833913921942627, null, 0.8331204160451039, 0.8233983503485154, null, 0.8331204160451039, 0.9118232255717322, null, 0.5243257053503286, 0.44057205438232094, null, 0.5243257053503286, 0.5897715677940957, null, 0.5243257053503286, 0.5873623032873929, null, 0.5243257053503286, 0.4754021177625021, null, 0.5243257053503286, 0.5112321842448565, null, 0.8108632800261676, 0.7530024747101416, null, 0.8108632800261676, 0.9156400477004524, null, 0.8108632800261676, 0.9179588808958042, null, 0.8108632800261676, 0.8062429909302403, null, 0.8108632800261676, 0.8233983503485154, null, 0.8108632800261676, 0.804568554539619, null, 0.8108632800261676, 0.8951193059948415, null, 0.0017678590772415292, 0.10055560632714533, null, 0.0017678590772415292, 0.022945574766746746, null, 0.0017678590772415292, 0.007618376837648433, null, 0.0017678590772415292, 0.07450590519997446, null, 0.9790881991990368, 0.9453564539969547, null, 0.9790881991990368, 0.9317218644740645, null, 0.9790881991990368, 0.9044457967412433, null, 0.9790881991990368, 0.972197305811158, null, 0.9118232255717322, 0.8312143480313637, null, 0.9118232255717322, 0.833913921942627, null, 0.9118232255717322, 0.9169770417622112, null, 0.9118232255717322, 0.8846388172676177, null, 0.9118232255717322, 0.9581330178204164, null, 0.11082228177754083, 0.07450590519997446, null, 0.11082228177754083, 0.10055560632714533, null, 0.11082228177754083, 0.1966054615107885, null, 0.11082228177754083, 0.022945574766746746, null, 0.11082228177754083, 0.1296003610701415, null, 0.11082228177754083, 0.11536895534762781, null, 0.9169770417622112, 0.8846388172676177, null, 0.9169770417622112, 0.8312143480313637, null, 0.9169770417622112, 0.9581330178204164, null, 0.9169770417622112, 0.833913921942627, null, 0.6942270151346928, 0.6972479982124109, null, 0.6942270151346928, 0.6104684100799159, null, 0.5060359085607702, 0.45126010531011573, null, 0.5060359085607702, 0.3933132350865912, null, 0.5060359085607702, 0.6104684100799159, null, 0.5060359085607702, 0.5122100109134189, null, 0.5060359085607702, 0.5323128108750551, null, 0.9179588808958042, 0.9156400477004524, null, 0.9179588808958042, 0.997356073943379, null, 0.9179588808958042, 0.9093604183680671, null, 0.9179588808958042, 0.8062429909302403, null, 0.9179588808958042, 0.903876041072764, null, 0.9179588808958042, 0.926046940924531, null, 0.9179588808958042, 0.8951193059948415, null, 0.33564711630454, 0.3923092612306702, null, 0.4773936005787609, 0.5669352095087468, null, 0.4773936005787609, 0.5323128108750551, null, 0.4773936005787609, 0.4519579453671305, null, 0.007618376837648433, 0.022945574766746746, null, 0.007618376837648433, 0.07450590519997446, null, 0.3960284383594811, 0.33862659118064153, null, 0.3960284383594811, 0.4754021177625021, null, 0.3960284383594811, 0.3934877485262872, null, 0.3960284383594811, 0.31474837310177817, null, 0.3960284383594811, 0.46970078476892596, null, 0.3960284383594811, 0.5112321842448565, null, 0.5122100109134189, 0.3933132350865912, null, 0.5122100109134189, 0.45126010531011573, null, 0.5122100109134189, 0.6104684100799159, null, 0.5122100109134189, 0.5323128108750551, null, 0.3702246020484862, 0.477296869228503, null, 0.9093604183680671, 0.997356073943379, null, 0.9093604183680671, 0.903876041072764, null, 0.9093604183680671, 0.926046940924531, null, 0.7429862386102624, 0.7692586035953708, null, 0.7429862386102624, 0.7989343622524816, null, 0.7429862386102624, 0.6937325416475308, null, 0.7429862386102624, 0.7403757798556933, null, 0.7429862386102624, 0.6796461137037179, null, 0.7429862386102624, 0.7310762414697035, null, 0.7429862386102624, 0.66764618725917, null, 0.997356073943379, 0.903876041072764, null, 0.997356073943379, 0.9156400477004524, null, 0.997356073943379, 0.926046940924531, null, 0.5081434199436198, 0.4964225781842716, null, 0.5081434199436198, 0.5320545885300109, null, 0.5081434199436198, 0.477296869228503, null, 0.06251964438918212, 0.018742674199284992, null, 0.06251964438918212, 0.06515205986677308, null, 0.06251964438918212, 0.07933468012625022, null, 0.06251964438918212, 0.09792584747146282, null, 0.06251964438918212, 0.04207419576140037, null, 0.8549574006104147, 0.7692586035953708, null, 0.8549574006104147, 0.7403757798556933, null, 0.8549574006104147, 0.8761551557367593, null, 0.8549574006104147, 0.8969183581245227, null, 0.8549574006104147, 0.8721952654644207, null, 0.8549574006104147, 0.8611646220404794, null, 0.8549574006104147, 0.7849845714597692, null, 0.581323487530803, 0.6497216921948329, null, 0.581323487530803, 0.6796461137037179, null, 0.581323487530803, 0.66764618725917, null, 0.6796461137037179, 0.6937325416475308, null, 0.6796461137037179, 0.66764618725917, null, 0.6796461137037179, 0.7849845714597692, null, 0.6796461137037179, 0.7692586035953708, null, 0.6796461137037179, 0.7403757798556933, null, 0.6796461137037179, 0.7310762414697035, null, 0.6796461137037179, 0.6497216921948329, null, 0.5897715677940957, 0.5873623032873929, null, 0.6937325416475308, 0.7310762414697035, null, 0.6937325416475308, 0.7403757798556933, null, 0.6937325416475308, 0.66764618725917, null, 0.6937325416475308, 0.7692586035953708, null, 0.903876041072764, 0.8951193059948415, null, 0.903876041072764, 0.8062429909302403, null, 0.903876041072764, 0.9156400477004524, null, 0.903876041072764, 0.926046940924531, null, 0.4754021177625021, 0.46970078476892596, null, 0.4754021177625021, 0.5112321842448565, null, 0.833913921942627, 0.8846388172676177, null, 0.833913921942627, 0.7871442960384691, null, 0.833913921942627, 0.8312143480313637, null, 0.1296003610701415, 0.07450590519997446, null, 0.1296003610701415, 0.10055560632714533, null, 0.1296003610701415, 0.21458014606304776, null, 0.1296003610701415, 0.1966054615107885, null, 0.1296003610701415, 0.022945574766746746, null, 0.1296003610701415, 0.2079018937432775, null, 0.1296003610701415, 0.20052788570280866, null, 0.1296003610701415, 0.11536895534762781, null, 0.7989343622524816, 0.7871442960384691, null, 0.7989343622524816, 0.8563027985803431, null, 0.7989343622524816, 0.9044457967412433, null, 0.477296869228503, 0.4964225781842716, null, 0.477296869228503, 0.5320545885300109, null, 0.5112321842448565, 0.46970078476892596, null, 0.5323128108750551, 0.4519579453671305, null, 0.5323128108750551, 0.6104684100799159, null, 0.5323128108750551, 0.45126010531011573, null, 0.24255497876141419, 0.21458014606304776, null, 0.24255497876141419, 0.328045839311933, null, 0.24255497876141419, 0.1966054615107885, null, 0.24255497876141419, 0.2079018937432775, null, 0.33862659118064153, 0.31474837310177817, null, 0.33862659118064153, 0.26375546839795383, null, 0.1966054615107885, 0.21458014606304776, null, 0.1966054615107885, 0.11536895534762781, null, 0.1966054615107885, 0.10055560632714533, null, 0.1966054615107885, 0.07450590519997446, null, 0.1966054615107885, 0.2079018937432775, null, 0.1966054615107885, 0.20052788570280866, null, 0.9453564539969547, 0.8563027985803431, null, 0.9453564539969547, 0.9044457967412433, null, 0.9453564539969547, 0.9317218644740645, null, 0.9156400477004524, 0.8062429909302403, null, 0.9156400477004524, 0.804568554539619, null, 0.9156400477004524, 0.8951193059948415, null, 0.31474837310177817, 0.20838120023923823, null, 0.31474837310177817, 0.26375546839795383, null, 0.31474837310177817, 0.33052321636808935, null, 0.7403757798556933, 0.7692586035953708, null, 0.7403757798556933, 0.6497216921948329, null, 0.7403757798556933, 0.7849845714597692, null, 0.7403757798556933, 0.7310762414697035, null, 0.7403757798556933, 0.66764618725917, null, 0.8951193059948415, 0.8062429909302403, null, 0.8951193059948415, 0.804568554539619, null, 0.07933468012625022, 0.018742674199284992, null, 0.07933468012625022, 0.04207419576140037, null, 0.07933468012625022, 0.06515205986677308, null, 0.6497216921948329, 0.7310762414697035, null, 0.6497216921948329, 0.66764618725917, null, 0.20838120023923823, 0.26375546839795383, null, 0.7310762414697035, 0.66764618725917, null, 0.7310762414697035, 0.7849845714597692, null, 0.7310762414697035, 0.7692586035953708, null, 0.0645278490226382, 0.018899092845912957, null, 0.0645278490226382, 0.14484890700941322, null, 0.0645278490226382, 0.12499484644792969, null, 0.0645278490226382, 0.04850639374743393, null, 0.8611646220404794, 0.7849845714597692, null, 0.8611646220404794, 0.8969183581245227, null, 0.8611646220404794, 0.8761551557367593, null, 0.8611646220404794, 0.7692586035953708, null, 0.8611646220404794, 0.8721952654644207, null, 0.8611646220404794, 0.9558163454692462, null, 0.36233035771481437, 0.364741224412758, null, 0.36233035771481437, 0.44315040688448404, null, 0.36233035771481437, 0.3934877485262872, null, 0.36233035771481437, 0.26375546839795383, null, 0.36233035771481437, 0.33052321636808935, null, 0.36233035771481437, 0.44057205438232094, null, 0.7530024747101416, 0.8062429909302403, null, 0.7530024747101416, 0.804568554539619, null, 0.45126010531011573, 0.384594444864403, null, 0.45126010531011573, 0.3933132350865912, null, 0.45126010531011573, 0.44315040688448404, null, 0.7871442960384691, 0.8312143480313637, null, 0.7871442960384691, 0.9044457967412433, null, 0.7871442960384691, 0.8563027985803431, null, 0.10055560632714533, 0.21458014606304776, null, 0.10055560632714533, 0.2079018937432775, null, 0.10055560632714533, 0.022945574766746746, null, 0.10055560632714533, 0.11536895534762781, null, 0.10055560632714533, 0.07450590519997446, null, 0.8233983503485154, 0.804568554539619, null, 0.6972479982124109, 0.6104684100799159, null, 0.328045839311933, 0.384594444864403, null, 0.328045839311933, 0.3933132350865912, null, 0.328045839311933, 0.364741224412758, null, 0.364741224412758, 0.3934877485262872, null, 0.364741224412758, 0.44057205438232094, null, 0.364741224412758, 0.33052321636808935, null, 0.364741224412758, 0.44315040688448404, null, 0.364741224412758, 0.3933132350865912, null, 0.44057205438232094, 0.3934877485262872, null, 0.44057205438232094, 0.44315040688448404, null, 0.44057205438232094, 0.33052321636808935, null, 0.04850639374743393, 0.12499484644792969, null, 0.04850639374743393, 0.14484890700941322, null, 0.04850639374743393, 0.018899092845912957, null, 0.3934877485262872, 0.33052321636808935, null, 0.9581330178204164, 0.8846388172676177, null, 0.8761551557367593, 0.8969183581245227, null, 0.8761551557367593, 0.7692586035953708, null, 0.8761551557367593, 0.7849845714597692, null, 0.8761551557367593, 0.8721952654644207, null, 0.8846388172676177, 0.8312143480313637, null, 0.12499484644792969, 0.2153934616573724, null, 0.12499484644792969, 0.14484890700941322, null, 0.384594444864403, 0.3933132350865912, null, 0.804568554539619, 0.8062429909302403, null, 0.9044457967412433, 0.8563027985803431, null, 0.9044457967412433, 0.9317218644740645, null, 0.2079018937432775, 0.26375546839795383, null, 0.2079018937432775, 0.21458014606304776, null, 0.2079018937432775, 0.20052788570280866, null, 0.09792584747146282, 0.06515205986677308, null, 0.09792584747146282, 0.04207419576140037, null, 0.09792584747146282, 0.018742674199284992, null, 0.11536895534762781, 0.022945574766746746, null, 0.11536895534762781, 0.21458014606304776, null, 0.11536895534762781, 0.07450590519997446, null, 0.9317218644740645, 0.972197305811158, null, 0.9317218644740645, 0.8563027985803431, null, 0.26375546839795383, 0.21458014606304776, null, 0.26375546839795383, 0.20052788570280866, null, 0.26375546839795383, 0.33052321636808935, null, 0.14484890700941322, 0.2153934616573724, null, 0.07450590519997446, 0.022945574766746746, null, 0.4964225781842716, 0.5320545885300109, null, 0.8721952654644207, 0.7849845714597692, null, 0.8721952654644207, 0.7692586035953708, null, 0.8721952654644207, 0.9558163454692462, null, 0.8721952654644207, 0.8969183581245227, null, 0.018742674199284992, 0.06515205986677308, null, 0.018742674199284992, 0.04207419576140037, null, 0.3933132350865912, 0.44315040688448404, null, 0.06515205986677308, 0.04207419576140037, null, 0.8969183581245227, 0.7849845714597692, null, 0.8969183581245227, 0.9558163454692462, null, 0.21458014606304776, 0.20052788570280866, null, 0.7692586035953708, 0.7849845714597692, null, 0.7692586035953708, 0.66764618725917, null]}, {"hoverinfo": "text", "marker": {"color": [9, 7, 7, 12, 6, 7, 9, 11, 9, 8, 11, 12, 10, 11, 11, 14, 13, 4, 10, 12, 10, 2, 12, 9, 13, 6, 9, 8, 10, 7, 5, 12, 5, 3, 9, 3, 5, 11, 3, 4, 12, 12, 13, 3, 8, 2, 11, 8, 9, 12, 6, 7, 7, 8, 7, 9, 6, 8, 10, 10, 10, 8, 7, 2, 12, 11, 8, 12, 8, 4, 13, 12, 8, 12, 3, 6, 12, 13, 4, 9, 3, 5, 2, 7, 7, 10, 11, 6, 11, 11, 12, 4, 10, 10, 12, 5, 8, 10, 11, 10, 12, 10, 13, 2, 3, 7, 8, 9, 4, 7, 11, 8, 7, 8, 10, 8, 13, 7, 9, 12, 6, 10, 14, 7, 6, 7, 7, 9, 5, 12, 9, 11, 8, 13, 11, 8, 10, 4, 2, 13, 5, 5, 12, 11, 9, 9, 9, 4, 10, 12, 7, 10, 12, 13, 14, 3, 12, 10, 5, 9, 10, 12, 7, 11, 11, 10, 12, 8, 12, 9, 11, 10, 7, 12, 7, 5, 11, 11, 6, 13, 7, 11, 8, 5, 12, 8, 8, 6, 8, 12, 13, 11, 12, 5, 12, 6, 9, 5, 9, 9], "colorbar": {"thickness": 15, "title": {"side": "right", "text": "Node Connections"}, "xanchor": "left"}, "colorscale": [[0.0, "rgb(255,255,217)"], [0.125, "rgb(237,248,177)"], [0.25, "rgb(199,233,180)"], [0.375, "rgb(127,205,187)"], [0.5, "rgb(65,182,196)"], [0.625, "rgb(29,145,192)"], [0.75, "rgb(34,94,168)"], [0.875, "rgb(37,52,148)"], [1.0, "rgb(8,29,88)"]], "line": {"width": 2}, "reversescale": true, "showscale": true, "size": 10}, "mode": "markers", "text": ["# of connections: 9", "# of connections: 7", "# of connections: 7", "# of connections: 12", "# of connections: 6", "# of connections: 7", "# of connections: 9", "# of connections: 11", "# of connections: 9", "# of connections: 8", "# of connections: 11", "# of connections: 12", "# of connections: 10", "# of connections: 11", "# of connections: 11", "# of connections: 14", "# of connections: 13", "# of connections: 4", "# of connections: 10", "# of connections: 12", "# of connections: 10", "# of connections: 2", "# of connections: 12", "# of connections: 9", "# of connections: 13", "# of connections: 6", "# of connections: 9", "# of connections: 8", "# of connections: 10", "# of connections: 7", "# of connections: 5", "# of connections: 12", "# of connections: 5", "# of connections: 3", "# of connections: 9", "# of connections: 3", "# of connections: 5", "# of connections: 11", "# of connections: 3", "# of connections: 4", "# of connections: 12", "# of connections: 12", "# of connections: 13", "# of connections: 3", "# of connections: 8", "# of connections: 2", "# of connections: 11", "# of connections: 8", "# of connections: 9", "# of connections: 12", "# of connections: 6", "# of connections: 7", "# of connections: 7", "# of connections: 8", "# of connections: 7", "# of connections: 9", "# of connections: 6", "# of connections: 8", "# of connections: 10", "# of connections: 10", "# of connections: 10", "# of connections: 8", "# of connections: 7", "# of connections: 2", "# of connections: 12", "# of connections: 11", "# of connections: 8", "# of connections: 12", "# of connections: 8", "# of connections: 4", "# of connections: 13", "# of connections: 12", "# of connections: 8", "# of connections: 12", "# of connections: 3", "# of connections: 6", "# of connections: 12", "# of connections: 13", "# of connections: 4", "# of connections: 9", "# of connections: 3", "# of connections: 5", "# of connections: 2", "# of connections: 7", "# of connections: 7", "# of connections: 10", "# of connections: 11", "# of connections: 6", "# of connections: 11", "# of connections: 11", "# of connections: 12", "# of connections: 4", "# of connections: 10", "# of connections: 10", "# of connections: 12", "# of connections: 5", "# of connections: 8", "# of connections: 10", "# of connections: 11", "# of connections: 10", "# of connections: 12", "# of connections: 10", "# of connections: 13", "# of connections: 2", "# of connections: 3", "# of connections: 7", "# of connections: 8", "# of connections: 9", "# of connections: 4", "# of connections: 7", "# of connections: 11", "# of connections: 8", "# of connections: 7", "# of connections: 8", "# of connections: 10", "# of connections: 8", "# of connections: 13", "# of connections: 7", "# of connections: 9", "# of connections: 12", "# of connections: 6", "# of connections: 10", "# of connections: 14", "# of connections: 7", "# of connections: 6", "# of connections: 7", "# of connections: 7", "# of connections: 9", "# of connections: 5", "# of connections: 12", "# of connections: 9", "# of connections: 11", "# of connections: 8", "# of connections: 13", "# of connections: 11", "# of connections: 8", "# of connections: 10", "# of connections: 4", "# of connections: 2", "# of connections: 13", "# of connections: 5", "# of connections: 5", "# of connections: 12", "# of connections: 11", "# of connections: 9", "# of connections: 9", "# of connections: 9", "# of connections: 4", "# of connections: 10", "# of connections: 12", "# of connections: 7", "# of connections: 10", "# of connections: 12", "# of connections: 13", "# of connections: 14", "# of connections: 3", "# of connections: 12", "# of connections: 10", "# of connections: 5", "# of connections: 9", "# of connections: 10", "# of connections: 12", "# of connections: 7", "# of connections: 11", "# of connections: 11", "# of connections: 10", "# of connections: 12", "# of connections: 8", "# of connections: 12", "# of connections: 9", "# of connections: 11", "# of connections: 10", "# of connections: 7", "# of connections: 12", "# of connections: 7", "# of connections: 5", "# of connections: 11", "# of connections: 11", "# of connections: 6", "# of connections: 13", "# of connections: 7", "# of connections: 11", "# of connections: 8", "# of connections: 5", "# of connections: 12", "# of connections: 8", "# of connections: 8", "# of connections: 6", "# of connections: 8", "# of connections: 12", "# of connections: 13", "# of connections: 11", "# of connections: 12", "# of connections: 5", "# of connections: 12", "# of connections: 6", "# of connections: 9", "# of connections: 5", "# of connections: 9", "# of connections: 9"], "type": "scatter", "x": [0.9869697610736279, 0.624153482406981, 0.8338182778735213, 0.8532059052767176, 0.7482056326379576, 0.4577572815822143, 0.13560486798568838, 0.38535699757675534, 0.8797375957811168, 0.13157768130016956, 0.20969045160533362, 0.09628781177856882, 0.3070346571486722, 0.8619173689695756, 0.8500678433353784, 0.12585365112716507, 0.9275336856439217, 0.862775265476485, 0.2851033301559258, 0.28780212078428924, 0.40660898670993195, 0.5232242486747795, 0.35707246442975615, 0.9177899406048944, 0.16628876313544427, 0.10101356362413283, 0.5020011569047959, 0.6851424229530523, 0.5934794605969209, 0.5645907472525039, 0.7768203829414974, 0.8907327548169215, 0.7782133589166081, 0.6751852563432427, 0.3944047170712487, 0.11257620044376704, 0.012286826432802433, 0.847853290944405, 0.12508790135814596, 0.1423690662058602, 0.14341313410747913, 0.3934488199960374, 0.28522854231115924, 0.6771965371330677, 0.9957088826463372, 0.01956133960110462, 0.7191557183666253, 0.16191362020363176, 0.6347095586946901, 0.7510066855592561, 0.45442823686341416, 0.13236316864525655, 0.8013853655471201, 0.6191164854888215, 0.565096284499566, 0.6409048817856382, 0.9402110768332033, 0.20621129201476396, 0.2807484992860627, 0.8455976229886206, 0.2865753738298653, 0.5590595890001976, 0.9188229169548633, 0.9833472208416912, 0.8633630900685745, 0.3336192006968821, 0.5020864018611464, 0.35547108714241726, 0.5999859831102019, 0.8897332713852858, 0.36791323857290703, 0.3779222868584883, 0.5326505397873061, 0.40705569942537134, 0.04258964238187257, 0.92349638307269, 0.4753977602300917, 0.3150603434952972, 0.8639540892257934, 0.97820266871148, 0.04903446130234068, 0.4009706853994799, 0.9871639666037187, 0.5857800665405284, 0.2591753914519669, 0.12081699596209272, 0.31730096135007657, 0.0652137818444617, 0.3907255813950712, 0.4628255820445688, 0.3559822242935765, 0.34034683031272595, 0.4234244257632893, 0.16378008859188997, 0.2173444602950888, 0.28059040908142474, 0.6070898368290693, 0.41823302414071506, 0.3806734271447626, 0.44569470875535344, 0.38485904466061915, 0.42123055605352044, 0.15726065366496034, 0.6480944530526397, 0.5741194758631747, 0.19585942240280918, 0.07378531016725698, 0.4384699777119164, 0.9670873241765257, 0.04690775296946825, 0.705201081256196, 0.11280852698632171, 0.9190353113813936, 0.5903866310338136, 0.7766251811400071, 0.7973770265015475, 0.7989277845995358, 0.23988807294614056, 0.7035136186035277, 0.12942704693481843, 0.08944950194952417, 0.45310919670590877, 0.2958146166684136, 0.6118863415761874, 0.9496136493291417, 0.10373796866461338, 0.4993589567624287, 0.3545408134145075, 0.06778804526178739, 0.29222103524212784, 0.5812710944355555, 0.20324681509857256, 0.09337496764275433, 0.7788124583933873, 0.19945793882169716, 0.51050629532226, 0.8323062050044018, 0.06350022181549875, 0.5881878031653837, 0.8196712631238203, 0.7687652114993547, 0.029143685842526246, 0.9115758170564746, 0.8572154134097416, 0.2330927671213927, 0.19309552058935997, 0.43261428194828966, 0.722949145455163, 0.5443507535396063, 0.31148861556919083, 0.3099124541965438, 0.36372335939599243, 0.36074062242419414, 0.2942813311136525, 0.24461086760918826, 0.9728352660627428, 0.9344061624607939, 0.19319330264287704, 0.37281707542384734, 0.7952389596785292, 0.44610263121268934, 0.9538764114888266, 0.47137988913898343, 0.22724679364310307, 0.5799678717948289, 0.25188744056361445, 0.44089678526402254, 0.6385395509803109, 0.33867997016860407, 0.6356640809040811, 0.1672742073258523, 0.4477916888273489, 0.03355285976890332, 0.9092444906434977, 0.8782894991450778, 0.7048005885631622, 0.643867839234746, 0.2777642375867829, 0.20600689092037183, 0.17455022300358247, 0.9247685785960813, 0.8458328760443887, 0.5505414681044513, 0.6555997118771973, 0.4076011323289145, 0.19573094509632516, 0.5711418988170233, 0.9093621603490467, 0.8249209416597039, 0.26882295265308465, 0.7940591740255577, 0.3085029676380945, 0.7388798490421817, 0.0740658976328823, 0.860944193351868, 0.9351632364768435, 0.31058998399945215, 0.9242379279668322, 0.5307973665839751, 0.1970230139390673], "y": [0.13526930498129897, 0.023727961332869585, 0.9459917354663355, 0.1397933785390162, 0.5493114334843303, 0.2910326462906512, 0.7645372040009379, 0.6576842574496234, 0.031276810133041955, 0.4590091718408418, 0.31512886260802586, 0.9172625756297638, 0.04374310679298565, 0.6504165694281814, 0.5629301459818352, 0.8123407596551933, 0.1216072756927653, 0.3446480913941109, 0.5450520034516552, 0.2396225843843952, 0.5747457743943686, 0.2971721948619802, 0.6321011445202953, 0.737646330484935, 0.8492488008851006, 0.23507984591810205, 0.6872610419622476, 0.6535956563875143, 0.7478292526611813, 0.6459586415454817, 0.3165294812043965, 0.15994386993759702, 0.1534939428430152, 0.18850905118317085, 0.07013452779634244, 0.01428066400923833, 0.8320688555544364, 0.05883547794610988, 0.010465333826459311, 0.08570732206032672, 0.9195817600707068, 0.9029733651708146, 0.39013031405086496, 0.3441410156081377, 0.11929345875600827, 0.6102195977122576, 0.7939335740030563, 0.6464563236512437, 0.9434917963009402, 0.9115825899729741, 0.13859685161004287, 0.7121292652088373, 0.4857716646500987, 0.060400166110335274, 0.988164110858574, 0.931529409242805, 0.8291724495033767, 0.967119873086269, 0.4274373927298899, 0.6473005866251652, 0.7300771635952249, 0.03600696026251382, 0.5252126265950375, 0.9272459756422667, 0.7612568106335946, 0.8043729607762939, 0.9918275707060329, 0.41352469234901346, 0.7690232666943452, 0.36580133579512997, 0.44067102675923764, 0.21227305244794714, 0.6674667644893176, 0.7805070442116522, 0.5948603733443145, 0.5135299843370144, 0.8844066227735533, 0.16820011213998332, 0.36737432447931917, 0.04588973991253498, 0.14419115153553996, 0.26601087368891985, 0.6933728269749324, 0.6476497050447253, 0.5964708894448989, 0.4327674958812908, 0.642477164385424, 0.7632062536099553, 0.6096751347867629, 0.6857298491340494, 0.4326854455892708, 0.9555681649865296, 0.8331204160451039, 0.5243257053503286, 0.8108632800261676, 0.0017678590772415292, 0.9790881991990368, 0.9118232255717322, 0.11082228177754083, 0.9169770417622112, 0.6942270151346928, 0.5060359085607702, 0.9179588808958042, 0.33564711630454, 0.4773936005787609, 0.007618376837648433, 0.3960284383594811, 0.5122100109134189, 0.3702246020484862, 0.9093604183680671, 0.7429862386102624, 0.997356073943379, 0.5081434199436198, 0.06251964438918212, 0.8549574006104147, 0.581323487530803, 0.6796461137037179, 0.5897715677940957, 0.6937325416475308, 0.903876041072764, 0.4754021177625021, 0.833913921942627, 0.1296003610701415, 0.7989343622524816, 0.477296869228503, 0.5112321842448565, 0.5323128108750551, 0.24255497876141419, 0.33862659118064153, 0.1966054615107885, 0.9453564539969547, 0.9156400477004524, 0.31474837310177817, 0.7403757798556933, 0.8951193059948415, 0.07933468012625022, 0.6497216921948329, 0.20838120023923823, 0.4519579453671305, 0.7310762414697035, 0.15246108240954048, 0.46970078476892596, 0.0645278490226382, 0.8611646220404794, 0.36233035771481437, 0.7530024747101416, 0.45126010531011573, 0.3923092612306702, 0.7871442960384691, 0.10055560632714533, 0.8233983503485154, 0.6972479982124109, 0.328045839311933, 0.364741224412758, 0.44057205438232094, 0.6840199139604201, 0.04850639374743393, 0.3934877485262872, 0.9581330178204164, 0.8761551557367593, 0.8846388172676177, 0.12499484644792969, 0.384594444864403, 0.804568554539619, 0.9044457967412433, 0.2079018937432775, 0.6104684100799159, 0.09792584747146282, 0.11536895534762781, 0.9317218644740645, 0.26375546839795383, 0.8312143480313637, 0.926046940924531, 0.14484890700941322, 0.018899092845912957, 0.972197305811158, 0.8563027985803431, 0.07450590519997446, 0.5873623032873929, 0.8062429909302403, 0.4964225781842716, 0.8721952654644207, 0.018742674199284992, 0.5669352095087468, 0.3933132350865912, 0.33052321636808935, 0.06515205986677308, 0.2153934616573724, 0.8969183581245227, 0.21458014606304776, 0.7692586035953708, 0.44315040688448404, 0.66764618725917, 0.6479251533108438, 0.7849845714597692, 0.5320545885300109, 0.022945574766746746, 0.9558163454692462, 0.04207419576140037, 0.20052788570280866]}],
+                        {"annotations": [{"showarrow": false, "text": "Python code: <a href='https://plot.ly/ipython-notebooks/network-graphs/'> https://plot.ly/ipython-notebooks/network-graphs/</a>", "x": 0.005, "xref": "paper", "y": -0.002, "yref": "paper"}], "hovermode": "closest", "margin": {"b": 20, "l": 5, "r": 5, "t": 40}, "showlegend": false, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"font": {"size": 16}, "text": "<br>Network graph made with Python"}, "xaxis": {"showgrid": false, "showticklabels": false, "zeroline": false}, "yaxis": {"showgrid": false, "showticklabels": false, "zeroline": false}},
+                        {"responsive": true}
+                    ).then(function(){
+                            
+var gd = document.getElementById('c38b4a7b-7dbb-43c0-946c-fdf37563aa6f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })
+                };
+                });
+            </script>
+        </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Reference">Reference<a class="anchor-link" href="#Reference">&#182;</a></h4><p>See <a href="https://plot.ly/python/reference/#scatter">https://plot.ly/python/reference/#scatter</a> for more information and chart attribute options!</p>
+
+</div>
+</div>
+</div>
+
+ 
+
+
+
+				
+			</section>
+			<!--End Plotly Basics Section-->
+			
+		</section>
+	</div>
+</main>
+
+<section class="--help-box">
+  <a
+    href="https://dash.plot.ly/getting-started
+  "
+    ><div class="--wrap">
+      <div class="--body">
+        <img
+          height="50%"
+          width="50%"
+          src="https://s3-us-west-1.amazonaws.com/plotly-tutorials/assets/dash-ad.png"
+        />
+      </div>
+    </div>
+  </a>
+</section>
+
+
+
+<script>
+
+    var array = [];
+
+    $('.tutorial-content :header:not(h6)').each(function (i, e) {
+        var item = $(e);
+        var itemText = item.text();
+        var hash = itemText.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').replace(/^-+|-+$/g, '').toLowerCase();
+        item.attr("id", hash);
+        array.push({text: itemText, tag: item.prop("tagName"), hash: hash});
+    });
+
+    $(".--sidebar-list").html(array.map(function(entry) {
+        var text = entry.text.replace(/[^a-z0-9\s\.:\-\?\!\(\))]/gi, '');
+        if(entry.tag.toLowerCase() < "h4"){
+            return('<li class="--sidebar-item"><a href="#' + entry.hash + '">' + text + '</a></li>');
+        }
+        else {
+            return('<li class="--sidebar-item"><a href="#' + entry.hash + '">' + text + '</a></li>');
+        }
+    }).join(""));
+
+
+    //$(".tutorial-content :header:not(h6)").append( "\<div class=\"icon copy\" data-tooltip=\"Click to copy direct link\"><svg style=\"width:24px;height:24px\" viewBox=\"0 0 24 24\"><path fill=\"#000000\" d=\"M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.65L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13,10.2 13,9.56 13.41,9.17Z\"/> </svg> </div>");
+
+</script>
+
+
+<footer class="--footer-main">
+        <section class="--footer-top">
+            <div class="--wrap">
+                <ul class="--footer-body">
+                    <li class="--footer-column">
+                        <h6 style="color:#e763fa" class="--footer-heading">Products</h6>&#x9;&#x9;&#x9;
+                        <ul>
+                            <li><a href="https://plot.ly/dash/" target="_self">Dash</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                            <li><a href="https://plot.ly/online-chart-maker/" target="_self">Chart Studio</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                            <li><a href="https://plot.ly/products/oem/" target="_self">Plotly OEM</a></li>
+                        </ul>
+                    </li>
+                    &#x9;&#x9;
+                    <li class="--footer-column">
+                        <h6 style="color:#636efa" class="--footer-heading">Pricing</h6>&#x9;&#x9;&#x9;
+                        <ul>
+                            <li><a href="https://go.plot.ly/get-pricing" target="_self">Enterprise Pricing</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                        </ul>
+                    </li>
+                    &#x9;&#x9;
+                    <li class="--footer-column">
+                        <h6 style="color:#00cc96" class="--footer-heading">About Us</h6>&#x9;&#x9;&#x9;
+                        <ul>
+                            <li><a href="https://plot.ly/company/careers" target="_self">Careers</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                            <li><a href="https://plot.ly/resources/" target="_self">Resources</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                            <li><a href="https://medium.com/@plotlygraphs" target="_self">Blog</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                        </ul>
+                    </li>
+                    &#x9;&#x9;
+                    <li class="--footer-column">
+                        <h6 style="color:#EF553B" class="--footer-heading">Support</h6>&#x9;&#x9;&#x9;
+                        <ul>
+                            <li><a href="https://community.plot.ly/" target="_self">Community Support</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                            <li><a href="https://plot.ly/graphing-libraries" target="_self">Documentation</a></li>
+                            &#x9;&#x9;&#x9;&#x9;
+                        </ul>
+                    </li>
+                    &#x9;&#x9;
+                    <li class="--footer-column">
+                        <h6 style="color:#119dff" class="--footer-heading">JOIN OUR MAILING LIST</h6>&#x9;&#x9;&#x9;
+                        <ul>
+                            &#x9;&#x9;&#x9;&#x9;
+                            <li>
+                              <p class="subscribe-text"> Sign up to stay in the loop with all things Plotly — from Dash Club to product updates, webinars, and more!</p>
+                              <a 
+                                href="https://go.plot.ly/subscription" 
+                                class="subscribe-button" 
+                                target="_blank">
+                                Subscribe
+                              </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="--footer-meta">
+            <div class="--wrap">
+                <div class="left">
+                    <article class="--copyright">Copyright &copy; 2019 Plotly. All rights reserved.</article>
+                </div>
+                <div class="right">
+                    <article class="--tos"><a href="https://plot.ly/terms-of-service/" target="_blank">Terms of Service</a>
+                    </article>
+                    <article class="--privacy"><a href="https://plot.ly/privacy/" target="_blank">Privacy Policy</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+
+<!-- Mathjax -->
+<script type='text/x-mathjax-config'>MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true}});</script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2CSafe.js&#038;ver=4.1'></script>
+
+ 
+ <!-- Hash offset Script -->
+<script src="/all_static//javascripts/hash_offset.js"></script>
+ <!-- Image Hover Script -->
+<script src="/all_static/javascripts/imghover.js"></script>
+ 
+
+
+
+<script>
+	window.intercomSettings = { app_id: "anwi88es" };
+</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/anwi88es';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+</body>
+
+</html>
